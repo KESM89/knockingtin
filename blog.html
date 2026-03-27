@@ -1,0 +1,29 @@
+---
+layout: default
+title: Blog
+description: "Fabrication knowledge written by someone who actually works it."
+---
+
+<section>
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-label">All Articles</div>
+        <div class="section-title">The Blog</div>
+      </div>
+    </div>
+
+    <div class="posts-list">
+      {% for post in site.posts %}
+      <a href="{{ post.url }}" class="post-row">
+        <div class="post-num">{{ forloop.index | prepend: '00' | slice: -2, 2 }}</div>
+        <div>
+          <div class="post-row-title">{{ post.title }}</div>
+          <div class="post-row-sub">{{ post.category }} · {% if post.read_time %}{{ post.read_time }} min read{% endif %}</div>
+        </div>
+        <div class="post-row-date">{{ post.date | date: "%b %-d, %Y" }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

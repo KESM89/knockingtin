@@ -1,0 +1,25 @@
+title: Knocking Tin
+tagline: "HVAC fabrication knowledge, from the shop floor."
+description: "Trade knowledge written by someone who actually works it. Ductwork fabrication, sheet metal, and the real-world craft of HVAC."
+url: "https://knockingtin.com"
+baseurl: ""
+
+author:
+  name: Kevin E.
+  shop: K&E Sheet Metal
+  shop_url: https://kesheetmetal.com
+
+# Build settings
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title/
+
+# Collections
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude from build
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

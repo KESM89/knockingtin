@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
+  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" />
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+  {% seo %}
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="{{ '/' | relative_url }}" class="wordmark">
+      <svg class="wordmark-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="3" fill="#1c1e21"/>
+        <path d="M5 21 L5 10 L10 14 L14 8 L18 14 L23 10 L23 21" stroke="#c8912a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <line x1="5" y1="21" x2="23" y2="21" stroke="#c8912a" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      KNOCKING <span>TIN</span>
+    </a>
+
+    <nav>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a href="{{ '/tools/' | relative_url }}">Tools</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
+      <a href="{{ site.author.shop_url }}" target="_blank">Shop</a>
+      <a href="#subscribe" class="nav-cta">Subscribe</a>
+    </nav>
+
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+{{ content }}
+
+<div class="newsletter-band" id="subscribe">
+  <div class="newsletter-inner">
+    <div class="section-label">Stay In The Loop</div>
+    <h2>Knowledge From<br>The Shop Floor</h2>
+    <p>
+      Join fabricators and field techs who want real knowledge — not content marketing
+      dressed up as expertise. When there's something worth saying, it lands in your inbox.
+    </p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Your email address" />
+      <button type="button">Subscribe →</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <a href="{{ '/' | relative_url }}" class="footer-wordmark">KNOCKING <span>TIN</span></a>
+      <div class="footer-tagline">HVAC fabrication knowledge, from the shop floor.</div>
+    </div>
+    <div class="footer-links">
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a href="{{ '/tools/' | relative_url }}">Tools</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
+      <a href="{{ site.author.shop_url }}" target="_blank">K&amp;E Sheet Metal</a>
+    </div>
+  </div>
+  <div class="footer-copy">© {{ 'now' | date: "%Y" }} Knocking Tin. Written and built by a working fabricator.</div>
+</footer>
+
+</body>
+</html>

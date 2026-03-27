@@ -1,0 +1,56 @@
+---
+layout: default
+---
+
+<div class="post-hero">
+  <div class="post-hero-inner">
+    {% if page.category %}
+    <span class="post-category">{{ page.category }}</span>
+    {% endif %}
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}
+    <p style="font-family:'Lora',serif; font-size:18px; color:var(--text-muted); line-height:1.6; margin-top:16px;">{{ page.description }}</p>
+    {% endif %}
+    <div class="post-meta" style="margin-top:24px;">
+      <span>{{ site.author.name }}</span>
+      <span class="divider">·</span>
+      <span>{{ page.date | date: "%B %-d, %Y" }}</span>
+      {% if page.read_time %}
+      <span class="divider">·</span>
+      <span>{{ page.read_time }} min read</span>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="post-body">
+  {{ content }}
+</div>
+
+<div class="post-footer">
+  {% if page.tags %}
+  <div class="post-tags">
+    {% for tag in page.tags %}
+    <span class="post-tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="post-nav">
+    {% if page.previous.url %}
+    <a href="{{ page.previous.url | relative_url }}" class="prev">
+      <div class="nav-dir">← Previous</div>
+      <div class="nav-title">{{ page.previous.title }}</div>
+    </a>
+    {% else %}
+    <div></div>
+    {% endif %}
+
+    {% if page.next.url %}
+    <a href="{{ page.next.url | relative_url }}" class="next">
+      <div class="nav-dir">Next →</div>
+      <div class="nav-title">{{ page.next.title }}</div>
+    </a>
+    {% endif %}
+  </div>
+</div>
