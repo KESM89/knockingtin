@@ -22,30 +22,9 @@ layout: default
     <div class="hero-subscribe">
       <h3>The Shop Floor Dispatch</h3>
       <p>New articles, fabrication deep-dives, and field-tested knowledge — delivered when there's actually something worth saying. No spam, ever.</p>
-      <div class="subscribe-form">
-  <input type="text" id="kt-name-hero" placeholder="Your name" />
-  <input type="email" id="kt-email-hero" placeholder="Email address" />
-  <button type="button" onclick="ktSubscribeHero()">Sign Me Up</button>
+      <div class="subscribe-form kit-override">
+  <script async data-uid="22a6c26ce3" src="https://knocking-tin.kit.com/22a6c26ce3/index.js"></script>
 </div>
-<p id="kt-msg-hero" style="font-size:13px;margin-top:4px;color:var(--brass);display:none;">You're in. Talk soon.</p>
-<p class="subscribe-note">Fabricators only. Unsubscribe any time.</p>
-
-<script>
-function ktSubscribeHero() {
-  const email = document.getElementById('kt-email-hero').value;
-  const name = document.getElementById('kt-name-hero').value;
-  if (!email) return;
-  fetch('https://app.kit.com/forms/22a6c26ce3/subscriptions', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ email_address: email, first_name: name })
-  }).then(() => {
-    document.getElementById('kt-msg-hero').style.display = 'block';
-    document.getElementById('kt-email-hero').value = '';
-    document.getElementById('kt-name-hero').value = '';
-  });
-}
-</script>
     </div>
   </div>
 </section>
