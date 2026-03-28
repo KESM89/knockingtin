@@ -3,7 +3,7 @@ layout: post
 title: "How to Order a Transition Without Wasting Your Fabricator's Time"
 description: "The measurements every field tech needs before picking up the phone — and the one that still gets missed all the time."
 category: Field Tech Guide
-date: 2025-02-28
+date: 2026-02-28
 read_time: 6
 featured: false
 tags: [transitions, ordering, field techs, measurements]
