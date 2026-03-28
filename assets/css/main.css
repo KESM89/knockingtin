@@ -193,36 +193,10 @@ section + section { border-top: 1px solid var(--border); }
 .btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
 
 /* ─── KIT FORM OVERRIDES ─────────────────────────────────── */
-.kit-override .formkit-form {
-  background: transparent !important;
-  padding: 0 !important;
-  border: none !important;
-}
-.kit-override .formkit-input {
-  background: var(--bg) !important;
-  border: 1px solid var(--border) !important;
-  color: var(--text) !important;
-  font-family: 'DM Sans', sans-serif !important;
-  font-size: 15px !important;
-  padding: 13px 16px !important;
-  border-radius: 4px !important;
-}
-.kit-override .formkit-submit {
-  background: var(--brass) !important;
-  color: #0e0d0b !important;
-  font-family: 'DM Sans', sans-serif !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.06em !important;
-  text-transform: uppercase !important;
-  border-radius: 4px !important;
-  border: none !important;
-}
-.kit-override .formkit-alert {
-  color: var(--brass) !important;
-  background: transparent !important;
-  border: none !important;
-}
+.kit-override .formkit-form { background: transparent !important; padding: 0 !important; border: none !important; }
+.kit-override .formkit-input { background: var(--bg) !important; border: 1px solid var(--border) !important; color: var(--text) !important; font-family: 'DM Sans', sans-serif !important; font-size: 15px !important; padding: 13px 16px !important; border-radius: 4px !important; }
+.kit-override .formkit-submit { background: var(--brass) !important; color: #0e0d0b !important; font-family: 'DM Sans', sans-serif !important; font-size: 13px !important; font-weight: 500 !important; letter-spacing: 0.06em !important; text-transform: uppercase !important; border-radius: 4px !important; border: none !important; }
+.kit-override .formkit-alert { color: var(--brass) !important; background: transparent !important; border: none !important; }
 
 /* ─── HERO ──────────────────────────────────────────────── */
 .hero {
