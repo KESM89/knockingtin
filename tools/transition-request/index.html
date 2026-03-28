@@ -634,13 +634,27 @@ function calculate() {
     weight += capSqft * mat.lbs_per_sqft;
   }
 
-  const slipFt  = ((Math.max(tw, bw) - 0.5) * 2 / 12) * qty;
-  const driveFt = ((Math.max(th, bh) + 2)   * 2 / 12) * qty;
+  // Cleat calculation — only when S-Lock is selected
+  // S-Lock goes on the 2 longer sides, Drive cleats on the 2 shorter sides
+  let totalSlip = 0, totalDrive = 0;
+
+  if (botConn === 's-lock') {
+    const botLong  = Math.max(bw, bh);
+    const botShort = Math.min(bw, bh);
+    totalSlip  += (botLong  * 2 / 12) * qty;
+    totalDrive += (botShort * 2 / 12) * qty;
+  }
+  if (topConn === 's-lock') {
+    const topLong  = Math.max(tw, th);
+    const topShort = Math.min(tw, th);
+    totalSlip  += (topLong  * 2 / 12) * qty;
+    totalDrive += (topShort * 2 / 12) * qty;
+  }
 
   document.getElementById('material-sqft').textContent   = sqft.toFixed(2) + ' sq ft';
   document.getElementById('material-weight').textContent = weight.toFixed(2) + ' lbs';
-  document.getElementById('slip-cleats').textContent     = slipFt.toFixed(2) + ' ft';
-  document.getElementById('drive-cleats').textContent    = driveFt.toFixed(2) + ' ft';
+  document.getElementById('slip-cleats').textContent     = totalSlip  > 0 ? totalSlip.toFixed(2)  + ' ft' : '—';
+  document.getElementById('drive-cleats').textContent    = totalDrive > 0 ? totalDrive.toFixed(2) + ' ft' : '—';
 
   // Summary
   const connMap = {
@@ -831,7 +845,7 @@ function drawSideView(ctx, x, y, w, h, bh, th, len, offsetY, gapFront, gapBack, 
 
   ctx.fillStyle = '#ede8df'; ctx.font = 'bold 12px DM Sans, sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('SIDE VIEW', cx, y+16);
+  ctx.fillText('RIGHT SIDE VIEW', cx, y+16);
   ctx.font = '9px DM Sans, sans-serif'; ctx.fillStyle = '#7d7870';
   ctx.fillText('CONN 2 (Top)', cx, topY-40);
   ctx.fillText('CONN 1 (Bottom)', bLeft+(bh*scale)/2, botY+50);
