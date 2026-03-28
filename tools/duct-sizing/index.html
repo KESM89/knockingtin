@@ -1,1 +1,766 @@
+---
+layout: default
+title: Duct Sizing Calculator
+description: "Size rectangular and round ductwork using the equal friction method at 0.1\" WG per 100 ft. SMACNA, ASHRAE, and Manual D compliant."
+---
 
+<style>
+/* ─── CALCULATOR PAGE STYLES ─────────────────────────────── */
+.calc-hero {
+  padding: 56px 24px 48px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.calc-hero-inner { max-width: 900px; margin: 0 auto; }
+
+.calc-hero .section-label { margin-bottom: 12px; }
+
+.calc-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5vw, 60px);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.calc-hero p {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 620px;
+}
+
+.calc-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.calc-badge {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+  border: 1px solid rgba(78,143,181,0.3);
+  border-radius: 2px;
+  padding: 3px 9px;
+}
+
+/* ─── MAIN CALC LAYOUT ───────────────────────────────────── */
+.calc-body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ─── INPUT PANEL ────────────────────────────────────────── */
+.input-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 32px 28px;
+  position: sticky;
+  top: 80px;
+}
+
+.input-panel h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.field-group label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.field-group .field-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.field-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.field-row input,
+.field-group input,
+.field-group select {
+  flex: 1;
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.field-row input:focus,
+.field-group input:focus,
+.field-group select:focus { border-color: var(--brass); }
+.field-group select { cursor: pointer; }
+.field-group select option { background: var(--surface); }
+
+.unit-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  min-width: 32px;
+}
+
+.divider-line {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 20px 0;
+}
+
+.calc-btn {
+  width: 100%;
+  background: var(--brass);
+  color: #0e0d0b;
+  border: none;
+  border-radius: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  margin-top: 4px;
+}
+.calc-btn:hover { opacity: 0.88; }
+
+.reset-btn {
+  width: 100%;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 10px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  margin-top: 8px;
+}
+.reset-btn:hover { color: var(--text); border-color: var(--text-muted); }
+
+/* ─── RESULTS PANEL ──────────────────────────────────────── */
+.results-panel { display: flex; flex-direction: column; gap: 20px; }
+
+.results-empty {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 56px 32px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.results-empty .empty-icon {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 64px;
+  color: var(--border);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.results-empty p {
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Round duct result */
+.result-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.result-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+
+.result-card-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.result-card-body { padding: 24px; }
+
+/* Primary result — round duct */
+.round-result {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.round-diagram {
+  flex-shrink: 0;
+}
+
+.round-specs { flex: 1; }
+
+.spec-primary {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  line-height: 1;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.spec-primary span {
+  font-size: 24px;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+.spec-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.spec-item {}
+.spec-item .label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+.spec-item .value {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+}
+.spec-item .value.warn { color: #d4823a; }
+.spec-item .value.ok { color: #6aaa6e; }
+
+/* Rectangular results */
+.rect-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.rect-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.rect-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--brass);
+}
+
+.rect-height-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 12px;
+}
+
+.rect-dims {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+
+.rect-dims span { font-size: 16px; color: var(--text-muted); }
+
+.rect-velocity {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.rect-velocity.warn { color: #d4823a; }
+.rect-velocity.ok { color: #6aaa6e; }
+
+/* Velocity status bar */
+.velocity-bar-wrap {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.velocity-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.velocity-bar-track {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  position: relative;
+  overflow: visible;
+}
+
+.velocity-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--brass);
+  transition: width 0.4s ease;
+  position: relative;
+}
+
+.velocity-bar-fill.warn { background: #d4823a; }
+.velocity-bar-fill.danger { background: #b84a3a; }
+.velocity-bar-fill.ok { background: #6aaa6e; }
+
+.velocity-zones {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  opacity: 0.7;
+}
+
+/* Notes / compliance box */
+.compliance-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--brass);
+  border-radius: 4px;
+  padding: 20px 24px;
+}
+
+.compliance-box h3 {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 12px;
+}
+
+.compliance-box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.compliance-box li {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+}
+
+.compliance-box li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--brass);
+  opacity: 0.6;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 750px) {
+  .calc-body { grid-template-columns: 1fr; }
+  .input-panel { position: static; }
+  .rect-grid { grid-template-columns: 1fr; }
+  .round-result { flex-direction: column; align-items: flex-start; }
+}
+</style>
+
+<!-- ═══ CALC HERO ══════════════════════════════════════════ -->
+<div class="calc-hero">
+  <div class="calc-hero-inner">
+    <div class="section-label">Free Tool</div>
+    <h1>Duct Sizing Calculator</h1>
+    <p>Size round and rectangular ductwork using the equal friction method at 0.1" WG per 100 ft. Results include equivalent rectangular sizes at 8", 10", and 12" heights with velocity checks.</p>
+    <div class="calc-badges">
+      <span class="calc-badge">SMACNA Compliant</span>
+      <span class="calc-badge">ASHRAE Fundamentals</span>
+      <span class="calc-badge">Manual D</span>
+      <span class="calc-badge">Equal Friction Method</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CALCULATOR ════════════════════════════════════════ -->
+<div class="calc-body">
+
+  <!-- INPUT PANEL -->
+  <div class="input-panel">
+    <h2>Inputs</h2>
+
+    <div class="field-group">
+      <label>Airflow (CFM)</label>
+      <div class="field-row">
+        <input type="number" id="cfm" min="10" max="50000" placeholder="e.g. 400" />
+        <span class="unit-label">CFM</span>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Friction Rate</label>
+      <div class="field-row">
+        <input type="number" id="friction" value="0.10" min="0.05" max="0.20" step="0.01" />
+        <span class="unit-label">in WG/100ft</span>
+      </div>
+      <span class="field-hint">SMACNA/Manual D standard: 0.08–0.10 residential, 0.10 commercial</span>
+    </div>
+
+    <div class="field-group">
+      <label>Application Type</label>
+      <select id="apptype">
+        <option value="residential">Residential (Supply)</option>
+        <option value="res-return">Residential (Return)</option>
+        <option value="commercial">Commercial (Supply)</option>
+        <option value="com-return">Commercial (Return)</option>
+      </select>
+      <span class="field-hint">Used to evaluate velocity against SMACNA limits</span>
+    </div>
+
+    <hr class="divider-line" />
+
+    <button class="calc-btn" onclick="calculate()">Calculate Duct Size</button>
+    <button class="reset-btn" onclick="resetCalc()">Reset</button>
+  </div>
+
+  <!-- RESULTS PANEL -->
+  <div class="results-panel" id="results-panel">
+
+    <div class="results-empty" id="empty-state">
+      <div class="empty-icon">∅</div>
+      <p>Enter airflow and friction rate,<br>then click Calculate.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ COMPLIANCE NOTES ══════════════════════════════════ -->
+<div style="max-width:900px;margin:0 auto;padding:0 24px 80px;">
+  <div class="compliance-box">
+    <h3>Standards &amp; Method</h3>
+    <ul>
+      <li><strong>Equal Friction Method</strong> — duct sized so friction loss is constant per unit length throughout the system. Design friction rate 0.1" WG per 100 ft per SMACNA and ASHRAE Fundamentals.</li>
+      <li><strong>Round diameter</strong> — calculated using ASHRAE Fundamentals formula: Hf = 0.109 × Q¹·⁹ / D⁵·⁰², solved for D. Result rounded up to nearest standard size.</li>
+      <li><strong>Rectangular equivalents</strong> — calculated using ASHRAE hydraulic diameter equivalence: De = 1.30 × (a×b)⁰·⁶²⁵ / (a+b)⁰·²⁵. Width rounded up to nearest even inch.</li>
+      <li><strong>Velocity limits (SMACNA/Manual D)</strong> — Residential supply: 600–900 FPM main, 400–700 FPM branch. Commercial supply: 1,000–1,500 FPM main, 600–1,000 FPM branch. Return air: 10–20% lower than supply.</li>
+      <li><strong>Standard sizes</strong> — round duct in 1" increments 4"–24", then 26", 28", 30". Rectangular widths rounded to nearest even inch.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+// ─── CONSTANTS ──────────────────────────────────────────────
+const ROUND_SIZES = [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,24,26,28,30];
+const RECT_HEIGHTS = [8, 10, 12];
+
+// Velocity limits by application (FPM) [min_ok, max_ok, max_warn]
+const VEL_LIMITS = {
+  'residential':  { min: 400,  ok: 900,  warn: 1100 },
+  'res-return':   { min: 300,  ok: 700,  warn: 900  },
+  'commercial':   { min: 600,  ok: 1500, warn: 2000 },
+  'com-return':   { min: 400,  ok: 1200, warn: 1600 },
+};
+
+const APP_LABELS = {
+  'residential': 'Residential Supply',
+  'res-return':  'Residential Return',
+  'commercial':  'Commercial Supply',
+  'com-return':  'Commercial Return',
+};
+
+// ─── CORE CALCULATIONS ──────────────────────────────────────
+
+// ASHRAE formula: Hf = 0.109 × Q^1.9 / D^5.02
+// Solve for D given Hf and Q
+function roundDuctDiameter(cfm, hf) {
+  // D = (0.109 * Q^1.9 / hf) ^ (1/5.02)
+  const d = Math.pow((0.109 * Math.pow(cfm, 1.9)) / hf, 1 / 5.02);
+  return d;
+}
+
+// Round up to next standard size
+function nearestStandardRound(d) {
+  for (let s of ROUND_SIZES) {
+    if (s >= d) return s;
+  }
+  return ROUND_SIZES[ROUND_SIZES.length - 1];
+}
+
+// Velocity in round duct (FPM)
+function roundVelocity(cfm, diam) {
+  const area = Math.PI * Math.pow(diam / 24, 2); // sq ft (diam in inches → /12 for radius → /2)
+  // area = π * (d/2)² in sq inches / 144 for sq ft
+  const areaSqFt = Math.PI * Math.pow(diam / 2, 2) / 144;
+  return cfm / areaSqFt;
+}
+
+// Rectangular equivalent width given height and equivalent round diameter
+// De = 1.30 * (a*b)^0.625 / (a+b)^0.25  →  solve for a given b and De
+function rectWidth(De, b) {
+  // Bisection method
+  let lo = 1, hi = 200, mid, val;
+  for (let i = 0; i < 100; i++) {
+    mid = (lo + hi) / 2;
+    val = 1.30 * Math.pow(mid * b, 0.625) / Math.pow(mid + b, 0.25);
+    if (val < De) lo = mid;
+    else hi = mid;
+    if (hi - lo < 0.001) break;
+  }
+  // Round up to nearest even inch (standard sheet metal sizes)
+  const w = Math.ceil(mid);
+  return w % 2 === 0 ? w : w + 1;
+}
+
+// Velocity in rectangular duct (FPM)
+function rectVelocity(cfm, w, h) {
+  const areaSqFt = (w * h) / 144;
+  return cfm / areaSqFt;
+}
+
+// Actual friction rate for a given round duct
+function actualFriction(cfm, d) {
+  return (0.109 * Math.pow(cfm, 1.9)) / Math.pow(d, 5.02);
+}
+
+// Velocity status
+function velStatus(vel, apptype) {
+  const lim = VEL_LIMITS[apptype];
+  if (vel > lim.warn) return 'danger';
+  if (vel > lim.ok)   return 'warn';
+  return 'ok';
+}
+
+function velLabel(vel, apptype) {
+  const lim = VEL_LIMITS[apptype];
+  if (vel > lim.warn) return '⚠ Too High';
+  if (vel > lim.ok)   return '△ Elevated';
+  if (vel < lim.min)  return '△ Low';
+  return '✓ OK';
+}
+
+// ─── SVG ROUND DUCT DIAGRAM ─────────────────────────────────
+function roundDiagramSVG(diam) {
+  const scale = Math.min(80, Math.max(40, diam * 3.5));
+  return `
+  <svg width="${scale+20}" height="${scale+20}" viewBox="0 0 ${scale+20} ${scale+20}" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="${(scale+20)/2}" cy="${(scale+20)/2}" r="${scale/2}" stroke="var(--border)" stroke-width="1.5" fill="var(--bg)"/>
+    <circle cx="${(scale+20)/2}" cy="${(scale+20)/2}" r="${scale/2}" stroke="var(--brass)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+    <!-- diameter line -->
+    <line x1="10" y1="${(scale+20)/2}" x2="${scale+10}" y2="${(scale+20)/2}" stroke="var(--brass)" stroke-width="1" opacity="0.5"/>
+    <text x="${(scale+20)/2}" y="${(scale+20)/2 - 6}" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="12" fill="var(--brass)">${diam}"</text>
+  </svg>`;
+}
+
+// ─── RENDER ─────────────────────────────────────────────────
+function calculate() {
+  const cfm     = parseFloat(document.getElementById('cfm').value);
+  const hf      = parseFloat(document.getElementById('friction').value);
+  const apptype = document.getElementById('apptype').value;
+
+  if (!cfm || cfm < 10) {
+    alert('Please enter a valid CFM value (minimum 10).');
+    return;
+  }
+  if (!hf || hf < 0.01) {
+    alert('Please enter a valid friction rate.');
+    return;
+  }
+
+  // Calculate
+  const dExact   = roundDuctDiameter(cfm, hf);
+  const dStd     = nearestStandardRound(dExact);
+  const vel      = roundVelocity(cfm, dStd);
+  const actFric  = actualFriction(cfm, dStd);
+  const vStatus  = velStatus(vel, apptype);
+  const vLabel   = velLabel(vel, apptype);
+  const lim      = VEL_LIMITS[apptype];
+
+  // Velocity bar width (0–2000 FPM range)
+  const barMax   = lim.warn * 1.2;
+  const barPct   = Math.min(100, (vel / barMax) * 100).toFixed(1);
+
+  // Rectangular equivalents
+  const rectResults = RECT_HEIGHTS.map(h => {
+    const w   = rectWidth(dStd, h);
+    const rv  = rectVelocity(cfm, w, h);
+    const rs  = velStatus(rv, apptype);
+    const rl  = velLabel(rv, apptype);
+    return { h, w, vel: rv, status: rs, label: rl };
+  });
+
+  // Build HTML
+  const panel = document.getElementById('results-panel');
+  panel.innerHTML = `
+
+    <!-- ROUND DUCT -->
+    <div class="result-card">
+      <div class="result-card-header">
+        <span class="result-card-title">Round Duct</span>
+        <span class="post-category">${APP_LABELS[apptype]}</span>
+      </div>
+      <div class="result-card-body">
+        <div class="round-result">
+          <div class="round-diagram">${roundDiagramSVG(dStd)}</div>
+          <div class="round-specs">
+            <div class="spec-primary">${dStd}<span>inch</span></div>
+            <div class="spec-sub">Exact: ${dExact.toFixed(2)}" → rounded up to ${dStd}" standard</div>
+            <div class="spec-grid">
+              <div class="spec-item">
+                <div class="label">Velocity</div>
+                <div class="value ${vStatus}">${Math.round(vel).toLocaleString()} FPM</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">Status</div>
+                <div class="value ${vStatus}">${vLabel}</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">Design Friction</div>
+                <div class="value">${hf.toFixed(3)}" WG/100ft</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">Actual Friction</div>
+                <div class="value">${actFric.toFixed(3)}" WG/100ft</div>
+              </div>
+            </div>
+
+            <div class="velocity-bar-wrap">
+              <div class="velocity-bar-label">
+                <span>0 FPM</span>
+                <span>${Math.round(vel).toLocaleString()} FPM</span>
+                <span>${Math.round(barMax).toLocaleString()} FPM</span>
+              </div>
+              <div class="velocity-bar-track">
+                <div class="velocity-bar-fill ${vStatus}" style="width:${barPct}%"></div>
+              </div>
+              <div class="velocity-zones">
+                <span>Low</span>
+                <span>Recommended ≤ ${lim.ok.toLocaleString()}</span>
+                <span>Max ≤ ${lim.warn.toLocaleString()}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECTANGULAR EQUIVALENTS -->
+    <div class="result-card">
+      <div class="result-card-header">
+        <span class="result-card-title">Rectangular Equivalents</span>
+        <span style="font-size:11px;color:var(--text-muted);">ASHRAE Hydraulic Diameter Method</span>
+      </div>
+      <div class="result-card-body">
+        <div class="rect-grid">
+          ${rectResults.map(r => `
+          <div class="rect-card">
+            <div class="rect-height-label">${r.h}" Height</div>
+            <div class="rect-dims">${r.w}" × ${r.h}"<span> in</span></div>
+            <div class="rect-velocity ${r.status}">${Math.round(r.vel).toLocaleString()} FPM &nbsp;${r.label}</div>
+          </div>`).join('')}
+        </div>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:16px;line-height:1.6;">
+          Widths rounded up to nearest even inch. All three options are hydraulically equivalent to the ${dStd}" round duct. 
+          Choose based on available ceiling clearance and aspect ratio — SMACNA recommends aspect ratio ≤ 4:1 where possible.
+        </p>
+      </div>
+    </div>
+
+    <!-- INPUT SUMMARY -->
+    <div style="padding: 16px 20px; background: var(--surface); border: 1px solid var(--border); border-radius:6px; display:flex; gap:32px; flex-wrap:wrap;">
+      <div class="spec-item"><div class="label">Airflow</div><div class="value">${cfm.toLocaleString()} CFM</div></div>
+      <div class="spec-item"><div class="label">Friction Rate</div><div class="value">${hf}" WG/100ft</div></div>
+      <div class="spec-item"><div class="label">Application</div><div class="value">${APP_LABELS[apptype]}</div></div>
+      <div class="spec-item"><div class="label">Method</div><div class="value">Equal Friction</div></div>
+    </div>
+  `;
+}
+
+function resetCalc() {
+  document.getElementById('cfm').value = '';
+  document.getElementById('friction').value = '0.10';
+  document.getElementById('apptype').value = 'residential';
+  document.getElementById('results-panel').innerHTML = `
+    <div class="results-empty" id="empty-state">
+      <div class="empty-icon">∅</div>
+      <p>Enter airflow and friction rate,<br>then click Calculate.</p>
+    </div>`;
+}
+
+// Allow Enter key to trigger calculate
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') calculate();
+});
+</script>
