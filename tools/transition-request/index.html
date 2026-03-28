@@ -1,0 +1,676 @@
+---
+layout: default
+title: Transition Request Form
+description: "Mobile-friendly transition request form for field techs. Enter dimensions and get a real-time 2D drawing and live quote."
+---
+
+<style>
+/* ─── PAGE STYLES ────────────────────────────────────────── */
+.calc-hero {
+  padding: 56px 24px 48px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.calc-hero-inner { max-width: 900px; margin: 0 auto; }
+.calc-hero .section-label { margin-bottom: 12px; }
+.calc-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5vw, 60px);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.calc-hero p {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 620px;
+}
+.calc-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+.calc-badge {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+  border: 1px solid rgba(78,143,181,0.3);
+  border-radius: 2px;
+  padding: 3px 9px;
+}
+
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+.form-body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ─── INPUT PANEL ────────────────────────────────────────── */
+.input-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 32px 28px;
+  position: sticky;
+  top: 80px;
+}
+.input-panel h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.field-group label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.field-group .field-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.7;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.field-row { display: flex; gap: 8px; align-items: center; }
+.field-row input,
+.field-group input,
+.field-group select,
+.field-group textarea {
+  flex: 1;
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.field-row input:focus,
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus { border-color: var(--brass); }
+.field-group select { cursor: pointer; }
+.field-group select option { background: var(--surface); }
+.field-group textarea { resize: vertical; min-height: 80px; font-size: 14px; }
+.unit-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  min-width: 20px;
+}
+.dim-pair { display: grid; grid-template-columns: 1fr 16px 1fr; gap: 6px; align-items: center; }
+.dim-pair .x-sep { text-align: center; color: var(--text-muted); font-size: 14px; }
+.divider-line { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+.section-sub {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 14px;
+  margin-top: 4px;
+}
+.submit-btn {
+  width: 100%;
+  background: var(--brass);
+  color: #0e0d0b;
+  border: none;
+  border-radius: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  margin-top: 4px;
+}
+.submit-btn:hover { opacity: 0.88; }
+.reset-btn {
+  width: 100%;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 10px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  margin-top: 8px;
+}
+.reset-btn:hover { color: var(--text); border-color: var(--text-muted); }
+
+/* ─── RIGHT PANEL ────────────────────────────────────────── */
+.right-panel { display: flex; flex-direction: column; gap: 20px; }
+
+.drawing-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.drawing-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+.drawing-card-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.drawing-canvas-wrap {
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  background: var(--bg);
+}
+#transition-canvas {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+}
+
+.quote-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.quote-card-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.quote-card-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.quote-card-body { padding: 24px; }
+.quote-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.quote-item .label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.quote-item .value {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+}
+.quote-total {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.quote-total .label {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.quote-total .total-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  color: var(--brass);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+.quote-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.confirmation {
+  display: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid #6aaa6e;
+  border-radius: 8px;
+  padding: 28px 24px;
+  text-align: center;
+}
+.confirmation h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.confirmation p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 750px) {
+  .form-body { grid-template-columns: 1fr; }
+  .input-panel { position: static; }
+  .quote-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- ═══ HERO ═════════════════════════════════════════════════ -->
+<div class="calc-hero">
+  <div class="calc-hero-inner">
+    <div class="section-label">Field Tech Tool</div>
+    <h1>Transition Request Form</h1>
+    <p>Enter your dimensions below to get a real-time 2D drawing and estimated quote. Submit the form and K&E Sheet Metal will confirm your order.</p>
+    <div class="calc-badges">
+      <span class="calc-badge">Real-Time Drawing</span>
+      <span class="calc-badge">Live Quote</span>
+      <span class="calc-badge">Mobile Friendly</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FORM + PREVIEW ════════════════════════════════════════ -->
+<div class="form-body">
+
+  <div class="input-panel">
+    <h2>Order Details</h2>
+
+    <div class="section-sub">Your Info</div>
+    <div class="field-group">
+      <label>Name</label>
+      <input type="text" id="tech-name" placeholder="Your name" />
+    </div>
+    <div class="field-group">
+      <label>Phone</label>
+      <input type="tel" id="tech-phone" placeholder="(555) 000-0000" />
+    </div>
+    <div class="field-group">
+      <label>Company</label>
+      <input type="text" id="tech-company" placeholder="Company name" />
+    </div>
+
+    <hr class="divider-line" />
+
+    <div class="section-sub">Transition Dimensions</div>
+
+    <div class="field-group">
+      <label>Connection 1 (W × H)</label>
+      <div class="dim-pair">
+        <input type="number" id="w1" min="1" max="120" placeholder="W" oninput="update()" />
+        <span class="x-sep">×</span>
+        <input type="number" id="h1" min="1" max="120" placeholder="H" oninput="update()" />
+      </div>
+      <span class="field-hint">Width × Height in inches</span>
+    </div>
+
+    <div class="field-group">
+      <label>Connection 2 (W × H)</label>
+      <div class="dim-pair">
+        <input type="number" id="w2" min="1" max="120" placeholder="W" oninput="update()" />
+        <span class="x-sep">×</span>
+        <input type="number" id="h2" min="1" max="120" placeholder="H" oninput="update()" />
+      </div>
+      <span class="field-hint">Width × Height in inches</span>
+    </div>
+
+    <div class="field-group">
+      <label>Length</label>
+      <div class="field-row">
+        <input type="number" id="len" min="1" max="120" placeholder="e.g. 12" oninput="update()" />
+        <span class="unit-label">in</span>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Offset</label>
+      <select id="offset" onchange="update()">
+        <option value="centered">Centered (no offset)</option>
+        <option value="left">Offset Left</option>
+        <option value="right">Offset Right</option>
+        <option value="top">Offset Top</option>
+        <option value="bottom">Offset Bottom</option>
+      </select>
+    </div>
+
+    <hr class="divider-line" />
+
+    <div class="section-sub">Specifications</div>
+
+    <div class="field-group">
+      <label>Gauge</label>
+      <select id="gauge" onchange="update()">
+        <option value="26">26 gauge (residential)</option>
+        <option value="24" selected>24 gauge (standard)</option>
+        <option value="22">22 gauge (heavy)</option>
+        <option value="20">20 gauge (commercial)</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label>Connection 1 Type</label>
+      <select id="conn1">
+        <option value="slip">Slip &amp; Drive</option>
+        <option value="flange">TDC / TDF Flange</option>
+        <option value="raw">Raw Edge</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label>Connection 2 Type</label>
+      <select id="conn2">
+        <option value="slip">Slip &amp; Drive</option>
+        <option value="flange">TDC / TDF Flange</option>
+        <option value="raw">Raw Edge</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label>Quantity</label>
+      <input type="number" id="qty" min="1" max="99" value="1" oninput="update()" />
+    </div>
+
+    <div class="field-group">
+      <label>Notes</label>
+      <textarea id="notes" placeholder="Job name, special instructions, delivery needs..."></textarea>
+    </div>
+
+    <hr class="divider-line" />
+
+    <button class="submit-btn" onclick="submitOrder()">Submit Order to K&amp;E →</button>
+    <button class="reset-btn" onclick="resetForm()">Reset</button>
+  </div>
+
+  <div class="right-panel">
+
+    <div class="drawing-card">
+      <div class="drawing-card-header">
+        <span class="drawing-card-title">Live Drawing — Front View</span>
+        <span style="font-size:11px;color:var(--text-muted);" id="drawing-dims">Enter dimensions</span>
+      </div>
+      <div class="drawing-canvas-wrap">
+        <svg id="transition-canvas" viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg">
+          <text x="210" y="145" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" fill="#7d7870">Enter dimensions to see drawing</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-card-header">
+        <span class="quote-card-title">Estimated Quote</span>
+        <span style="font-size:11px;color:var(--text-muted);">Confirmed on order review</span>
+      </div>
+      <div class="quote-card-body" id="quote-body">
+        <p style="font-size:14px;color:var(--text-muted);font-family:'Lora',serif;">Enter dimensions to see an estimate.</p>
+      </div>
+    </div>
+
+    <div class="confirmation" id="confirmation">
+      <h3>Order Submitted ✓</h3>
+      <p>Your transition request has been sent to K&amp;E Sheet Metal. We'll confirm your order and lead time by phone or email within one business day.</p>
+      <p style="margin-top:12px;"><a href="https://kesheetmetal.com" style="color:var(--brass);">Visit K&amp;E Sheet Metal →</a></p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const MATERIAL_COST = { '26': 0.28, '24': 0.35, '22': 0.44, '20': 0.55 };
+const LABOR_BASE    = 18.00;
+const LABOR_SQFT    = 0.85;
+const MARKUP        = 1.45;
+const MIN_PRICE     = 22.00;
+
+function surfaceArea(w1, h1, w2, h2, len) {
+  const topBot = 2 * ((w1 + w2) / 2) * len;
+  const sides  = 2 * ((h1 + h2) / 2) * len;
+  return topBot + sides;
+}
+
+function calcQuote(w1, h1, w2, h2, len, gauge, qty) {
+  const sa      = surfaceArea(w1, h1, w2, h2, len);
+  const sqFt    = sa / 144;
+  const matCost = sa * MATERIAL_COST[gauge];
+  const labCost = LABOR_BASE + (sqFt * LABOR_SQFT);
+  const unit    = Math.max(MIN_PRICE, (matCost + labCost) * MARKUP);
+  const total   = unit * qty;
+  return { unit, total, sqFt, matCost, labCost };
+}
+
+function drawTransition(w1, h1, w2, h2, len, offset) {
+  const svg  = document.getElementById('transition-canvas');
+  const VW   = 420, VH = 280;
+  const pad  = 48;
+  const scale = Math.min((VW - pad * 2) / Math.max(w1, w2, 40),
+                         (VH - pad * 2) / (h1 + 60));
+
+  const drawW1 = w1 * scale;
+  const drawH1 = h1 * scale;
+  const drawW2 = w2 * scale;
+  const drawH2 = h2 * scale;
+
+  const cx       = VW / 2;
+  const yBottom  = VH - pad;
+  const yTop     = yBottom - drawH1;
+
+  let xShift = 0;
+  if (offset === 'left')  xShift = -(drawW1 - drawW2) / 2;
+  if (offset === 'right') xShift =  (drawW1 - drawW2) / 2;
+
+  const lx1 = cx - drawW1 / 2, lx2 = cx + drawW1 / 2;
+  const sx1 = cx - drawW2 / 2 + xShift, sx2 = cx + drawW2 / 2 + xShift;
+
+  let yShift = 0;
+  if (offset === 'top')    yShift = -(drawH1 - drawH2);
+  if (offset === 'bottom') yShift =  (drawH1 - drawH2);
+
+  const syTop = yTop + yShift;
+  const syBot = yTop + drawH2 + yShift;
+
+  const brass = '#c8912a';
+  const dim   = '#4e8fb5';
+  const muted = '#7d7870';
+
+  let s = `
+    <rect x="${lx1}" y="${yTop}" width="${drawW1}" height="${drawH1}"
+      fill="#1c1e21" stroke="${brass}" stroke-width="1.5"/>
+    <rect x="${sx1}" y="${syTop}" width="${drawW2}" height="${drawH2}"
+      fill="#232629" stroke="${brass}" stroke-width="1.5" stroke-dasharray="5 3"/>
+    <line x1="${lx1}" y1="${yTop}"    x2="${sx1}" y2="${syTop}" stroke="${muted}" stroke-width="1" stroke-dasharray="3 3"/>
+    <line x1="${lx2}" y1="${yTop}"    x2="${sx2}" y2="${syTop}" stroke="${muted}" stroke-width="1" stroke-dasharray="3 3"/>
+    <line x1="${lx1}" y1="${yBottom}" x2="${sx1}" y2="${syBot}" stroke="${muted}" stroke-width="1" stroke-dasharray="3 3"/>
+    <line x1="${lx2}" y1="${yBottom}" x2="${sx2}" y2="${syBot}" stroke="${muted}" stroke-width="1" stroke-dasharray="3 3"/>
+
+    <line x1="${lx1}" y1="${yBottom+14}" x2="${lx2}" y2="${yBottom+14}" stroke="${dim}" stroke-width="1"/>
+    <line x1="${lx1}" y1="${yBottom+10}" x2="${lx1}" y2="${yBottom+18}" stroke="${dim}" stroke-width="1"/>
+    <line x1="${lx2}" y1="${yBottom+10}" x2="${lx2}" y2="${yBottom+18}" stroke="${dim}" stroke-width="1"/>
+    <text x="${cx}" y="${yBottom+28}" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="${dim}">${w1}"</text>
+
+    <line x1="${lx1-14}" y1="${yTop}"    x2="${lx1-14}" y2="${yBottom}" stroke="${dim}" stroke-width="1"/>
+    <line x1="${lx1-18}" y1="${yTop}"    x2="${lx1-10}" y2="${yTop}"    stroke="${dim}" stroke-width="1"/>
+    <line x1="${lx1-18}" y1="${yBottom}" x2="${lx1-10}" y2="${yBottom}" stroke="${dim}" stroke-width="1"/>
+    <text x="${lx1-26}" y="${(yTop+yBottom)/2+4}" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="${dim}" transform="rotate(-90,${lx1-26},${(yTop+yBottom)/2+4})">${h1}"</text>
+
+    <text x="${(sx1+sx2)/2}" y="${syTop-8}" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="${muted}">${w2}" × ${h2}"</text>
+
+    <text x="${cx}" y="${(yTop+yBottom)/2+4}" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="13" fill="${brass}" opacity="0.5">CONN 1</text>
+    <text x="${(sx1+sx2)/2}" y="${(syTop+syBot)/2+4}" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="11" fill="${brass}" opacity="0.4">CONN 2</text>
+  `;
+
+  if (offset !== 'centered') {
+    s += `<text x="${VW-8}" y="20" text-anchor="end" font-family="'DM Sans',sans-serif" font-size="10" fill="${muted}">Offset: ${offset}</text>`;
+  }
+
+  svg.innerHTML = s;
+}
+
+function update() {
+  const w1     = parseFloat(document.getElementById('w1').value)  || 0;
+  const h1     = parseFloat(document.getElementById('h1').value)  || 0;
+  const w2     = parseFloat(document.getElementById('w2').value)  || 0;
+  const h2     = parseFloat(document.getElementById('h2').value)  || 0;
+  const len    = parseFloat(document.getElementById('len').value) || 0;
+  const qty    = parseInt(document.getElementById('qty').value)   || 1;
+  const gauge  = document.getElementById('gauge').value;
+  const offset = document.getElementById('offset').value;
+
+  document.getElementById('drawing-dims').textContent =
+    (w1 && h1 && w2 && h2)
+      ? `${w1}"×${h1}" → ${w2}"×${h2}"`
+      : 'Enter dimensions';
+
+  if (w1 > 0 && h1 > 0 && w2 > 0 && h2 > 0) {
+    drawTransition(w1, h1, w2, h2, len, offset);
+  }
+
+  if (w1 > 0 && h1 > 0 && w2 > 0 && h2 > 0 && len > 0) {
+    const q = calcQuote(w1, h1, w2, h2, len, gauge, qty);
+    document.getElementById('quote-body').innerHTML = `
+      <div class="quote-grid">
+        <div class="quote-item">
+          <div class="label">Surface Area</div>
+          <div class="value">${q.sqFt.toFixed(2)} sq ft</div>
+        </div>
+        <div class="quote-item">
+          <div class="label">Unit Price</div>
+          <div class="value">$${q.unit.toFixed(2)}</div>
+        </div>
+        <div class="quote-item">
+          <div class="label">Quantity</div>
+          <div class="value">${qty}</div>
+        </div>
+        <div class="quote-item">
+          <div class="label">Gauge</div>
+          <div class="value">${gauge} ga</div>
+        </div>
+      </div>
+      <div class="quote-total">
+        <span class="label">Estimated Total</span>
+        <span class="total-price">$${q.total.toFixed(2)}</span>
+      </div>
+      <p class="quote-note">Estimate only — final price confirmed by K&amp;E on order review. Does not include delivery.</p>
+    `;
+  }
+}
+
+function submitOrder() {
+  const name    = document.getElementById('tech-name').value.trim();
+  const phone   = document.getElementById('tech-phone').value.trim();
+  const w1      = document.getElementById('w1').value;
+  const h1      = document.getElementById('h1').value;
+  const w2      = document.getElementById('w2').value;
+  const h2      = document.getElementById('h2').value;
+  const len     = document.getElementById('len').value;
+
+  if (!name)  { alert('Please enter your name.'); return; }
+  if (!phone) { alert('Please enter your phone number.'); return; }
+  if (!w1 || !h1 || !w2 || !h2 || !len) {
+    alert('Please enter all transition dimensions.');
+    return;
+  }
+
+  const company = document.getElementById('tech-company').value;
+  const qty     = document.getElementById('qty').value;
+  const gauge   = document.getElementById('gauge').value;
+  const offset  = document.getElementById('offset').value;
+  const conn1   = document.getElementById('conn1').value;
+  const conn2   = document.getElementById('conn2').value;
+  const notes   = document.getElementById('notes').value;
+
+  const q = calcQuote(
+    parseFloat(w1), parseFloat(h1),
+    parseFloat(w2), parseFloat(h2),
+    parseFloat(len), gauge, parseInt(qty)
+  );
+
+  const body = `TRANSITION REQUEST — K&E Sheet Metal\n\n`
+    + `FROM: ${name}\n`
+    + `PHONE: ${phone}\n`
+    + `COMPANY: ${company || 'N/A'}\n\n`
+    + `--- DIMENSIONS ---\n`
+    + `Connection 1: ${w1}" × ${h1}"\n`
+    + `Connection 2: ${w2}" × ${h2}"\n`
+    + `Length: ${len}"\n`
+    + `Offset: ${offset}\n\n`
+    + `--- SPECS ---\n`
+    + `Gauge: ${gauge} ga\n`
+    + `Connection 1 Type: ${conn1}\n`
+    + `Connection 2 Type: ${conn2}\n`
+    + `Quantity: ${qty}\n\n`
+    + `--- ESTIMATE ---\n`
+    + `Unit: $${q.unit.toFixed(2)}\n`
+    + `Total: $${q.total.toFixed(2)}\n\n`
+    + `--- NOTES ---\n`
+    + (notes || 'None');
+
+  const subject = encodeURIComponent(`Transition Request — ${name} — ${w1}x${h1} to ${w2}x${h2}`);
+  const bodyEnc = encodeURIComponent(body);
+
+  window.location.href = `mailto:orders@kesheetmetal.com?subject=${subject}&body=${bodyEnc}`;
+
+  document.getElementById('confirmation').style.display = 'block';
+  document.getElementById('confirmation').scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetForm() {
+  ['tech-name','tech-phone','tech-company','w1','h1','w2','h2','len','notes'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('qty').value = '1';
+  document.getElementById('gauge').value = '24';
+  document.getElementById('offset').value = 'centered';
+  document.getElementById('conn1').value = 'slip';
+  document.getElementById('conn2').value = 'slip';
+  document.getElementById('drawing-dims').textContent = 'Enter dimensions';
+  document.getElementById('transition-canvas').innerHTML =
+    `<text x="210" y="145" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" fill="#7d7870">Enter dimensions to see drawing</text>`;
+  document.getElementById('quote-body').innerHTML =
+    `<p style="font-size:14px;color:var(--text-muted);font-family:'Lora',serif;">Enter dimensions to see an estimate.</p>`;
+  document.getElementById('confirmation').style.display = 'none';
+}
+</script>
