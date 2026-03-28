@@ -3,7 +3,7 @@ layout: post
 title: "We're Live. Sort Of."
 description: "The site is up. The domain works. A lot of it still needs to be built. Here's what this is, why I finally put it live, and where it's headed."
 category: Behind The Shop
-date: 2025-03-28
+date: 2026-03-28
 read_time: 5
 featured: false
 tags: [knocking tin, behind the scenes, building in public]
