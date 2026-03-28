@@ -45,10 +45,27 @@
       Join fabricators and field techs who want real knowledge — not content marketing
       dressed up as expertise. When there's something worth saying, it lands in your inbox.
     </p>
-    <div class="newsletter-form">
-      <input type="email" placeholder="Your email address" />
-      <button type="button">Subscribe →</button>
-    </div>
+   <div class="newsletter-form">
+  <input type="email" id="kt-email" placeholder="Your email address" />
+  <button type="button" onclick="ktSubscribe()">Subscribe →</button>
+</div>
+<p id="kt-msg" style="font-size:13px;margin-top:12px;color:var(--brass);display:none;">You're in. Talk soon.</p>
+
+<script async data-uid="22a6c26ce3" src="https://knocking-tin.kit.com/22a6c26ce3/index.js"></script>
+<script>
+function ktSubscribe() {
+  const email = document.getElementById('kt-email').value;
+  if (!email) return;
+  fetch('https://app.kit.com/forms/22a6c26ce3/subscriptions', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ email_address: email })
+  }).then(() => {
+    document.getElementById('kt-msg').style.display = 'block';
+    document.getElementById('kt-email').value = '';
+  });
+}
+</script>
   </div>
 </div>
 
