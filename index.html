@@ -154,7 +154,7 @@ layout: default
       {% assign recent_posts = site.posts | limit: 5 %}
       {% for post in recent_posts %}
       <a href="{{ post.url }}" class="post-row">
-        <div class="post-num">{{ forloop.index | prepend: '00' | slice: -2, 2 }}</div>
+        <div class="post-num">{{ site.posts.size | minus: forloop.index | plus: 1 | prepend: '00' | slice: -2, 2 }}</div>
         <div>
           <div class="post-row-title">{{ post.title }}</div>
           <div class="post-row-sub">{{ post.category }} · {% if post.read_time %}{{ post.read_time }} min read{% endif %}</div>
