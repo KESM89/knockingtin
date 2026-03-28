@@ -1,16 +1,17 @@
 ---
 layout: default
 title: Transition Request Form
-description: "Mobile-friendly transition request form for field techs. Enter dimensions and get a real-time 2D drawing."
+description: "Mobile-friendly transition request form for field techs. Enter dimensions and get a real-time 2D orthographic drawing. Submit to K&E Sheet Metal."
 ---
 
 <style>
+/* ─── PAGE HERO ──────────────────────────────────────────── */
 .calc-hero {
   padding: 56px 24px 48px;
   border-bottom: 1px solid var(--border);
   background: var(--surface);
 }
-.calc-hero-inner { max-width: 1000px; margin: 0 auto; }
+.calc-hero-inner { max-width: 1100px; margin: 0 auto; }
 .calc-hero .section-label { margin-bottom: 12px; }
 .calc-hero h1 {
   font-family: 'Bebas Neue', sans-serif;
@@ -39,14 +40,14 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
   padding: 3px 9px;
 }
 
-/* ─── LAYOUT ─────────────────────────────────────────────── */
+/* ─── MAIN LAYOUT ────────────────────────────────────────── */
 .form-body {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 48px 24px 80px;
+  padding: 40px 24px 80px;
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 32px;
+  grid-template-columns: 360px 1fr;
+  gap: 28px;
   align-items: start;
 }
 
@@ -55,45 +56,49 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 32px 28px;
+  overflow: hidden;
   position: sticky;
   top: 80px;
 }
-.input-panel h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  letter-spacing: 0.04em;
-  color: var(--text);
-  margin-bottom: 24px;
-  padding-bottom: 16px;
+
+.panel-section {
+  padding: 24px 24px 20px;
   border-bottom: 1px solid var(--border);
 }
+.panel-section:last-child { border-bottom: none; }
+
+.panel-section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  color: var(--brass);
+  margin-bottom: 16px;
+}
+
 .field-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 16px;
+  gap: 5px;
+  margin-bottom: 14px;
 }
+.field-group:last-child { margin-bottom: 0; }
+
 .field-group label {
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
-.field-group .field-hint {
+.field-hint {
   font-size: 11px;
   color: var(--text-muted);
-  opacity: 0.7;
-  margin-top: 2px;
+  opacity: 0.65;
   line-height: 1.4;
 }
-.field-row { display: flex; gap: 8px; align-items: center; }
-.field-row input,
+
 .field-group input,
-.field-group select,
-.field-group textarea {
-  flex: 1;
+.field-group select {
   width: 100%;
   background: var(--bg);
   border: 1px solid var(--border);
@@ -102,52 +107,54 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
   font-family: 'DM Sans', sans-serif;
   font-size: 15px;
   font-weight: 500;
-  padding: 10px 12px;
+  padding: 9px 12px;
   outline: none;
   transition: border-color 0.15s;
 }
-.field-row input:focus,
 .field-group input:focus,
-.field-group select:focus,
-.field-group textarea:focus { border-color: var(--brass); }
+.field-group select:focus { border-color: var(--brass); }
 .field-group select { cursor: pointer; }
 .field-group select option { background: var(--surface); }
-.field-group textarea { resize: vertical; min-height: 80px; font-size: 14px; }
-.unit-label {
-  font-size: 12px;
-  color: var(--text-muted);
-  white-space: nowrap;
-  min-width: 20px;
-}
 
-/* Width / Depth pair */
-.dim-pair {
+.dim-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
-.dim-row {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 8px;
-  align-items: center;
+.dim-grid input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color 0.15s;
 }
-.dim-row-label {
+.dim-grid input:focus { border-color: var(--brass); }
+.dim-col { display: flex; flex-direction: column; gap: 4px; }
+.dim-col-label { font-size: 10px; color: var(--text-muted); }
+
+/* Gap info box */
+.gap-info {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--brass);
+  border-radius: 4px;
+  padding: 10px 12px;
   font-size: 11px;
   color: var(--text-muted);
-  letter-spacing: 0.04em;
-}
-
-.divider-line { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
-.section-sub {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--brass);
+  line-height: 1.6;
   margin-bottom: 14px;
-  margin-top: 4px;
 }
+.gap-info strong { color: var(--text); }
+
+/* Buttons */
+.panel-buttons { padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
+
 .submit-btn {
   width: 100%;
   background: var(--brass);
@@ -162,10 +169,10 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
   padding: 14px;
   cursor: pointer;
   transition: opacity 0.15s;
-  margin-top: 4px;
 }
 .submit-btn:hover { opacity: 0.88; }
-.reset-btn {
+
+.secondary-btn {
   width: 100%;
   background: transparent;
   color: var(--text-muted);
@@ -179,51 +186,98 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
   padding: 10px;
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s;
-  margin-top: 8px;
 }
-.reset-btn:hover { color: var(--text); border-color: var(--text-muted); }
+.secondary-btn:hover { color: var(--text); border-color: var(--text-muted); }
 
 /* ─── RIGHT PANEL ────────────────────────────────────────── */
 .right-panel { display: flex; flex-direction: column; gap: 20px; }
 
+/* Drawing card */
 .drawing-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
 }
-.drawing-card-header {
+.card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 24px;
+  padding: 14px 20px;
   border-bottom: 1px solid var(--border);
   background: var(--surface2);
 }
-.drawing-card-title {
+.card-title {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
-.drawing-canvas-wrap {
-  padding: 24px;
+.canvas-wrap {
+  padding: 20px;
   background: var(--bg);
+}
+#drawing-canvas {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+}
+
+/* Material card */
+.material-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.material-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 0;
 }
-.drawing-view { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.drawing-view-label {
+.material-item {
+  padding: 16px 20px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.material-item:nth-child(2n) { border-right: none; }
+.material-item:nth-last-child(-n+2) { border-bottom: none; }
+.material-item .m-label {
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
+  margin-bottom: 4px;
 }
-.drawing-view svg { width: 100%; height: auto; }
+.material-item .m-value {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text);
+}
 
+/* Summary card */
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.summary-body { padding: 20px; display: flex; flex-direction: column; gap: 0; }
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.summary-row:last-child { border-bottom: none; }
+.summary-row .s-label { color: var(--text-muted); }
+.summary-row .s-value { color: var(--text); font-weight: 500; }
+
+/* Confirmation */
 .confirmation {
   display: none;
   background: var(--surface);
@@ -242,48 +296,16 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
 }
 .confirmation p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 
-/* ─── ORDER SUMMARY ──────────────────────────────────────── */
-.summary-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-}
-.summary-card-header {
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface2);
-}
-.summary-card-title {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.summary-body { padding: 24px; display: flex; flex-direction: column; gap: 10px; }
-.summary-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-}
-.summary-row:last-child { border-bottom: none; padding-bottom: 0; }
-.summary-row .s-label { color: var(--text-muted); }
-.summary-row .s-value { color: var(--text); font-weight: 500; }
-.summary-empty {
-  font-family: 'Lora', serif;
-  font-size: 14px;
-  color: var(--text-muted);
-}
-
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
-@media (max-width: 800px) {
+@media (max-width: 860px) {
   .form-body { grid-template-columns: 1fr; }
   .input-panel { position: static; }
-  .drawing-canvas-wrap { grid-template-columns: 1fr; }
+  .material-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .dim-grid { grid-template-columns: 1fr; }
+  .material-grid { grid-template-columns: 1fr; }
+  .material-item { border-right: none; }
 }
 </style>
 
@@ -292,130 +314,169 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
   <div class="calc-hero-inner">
     <div class="section-label">Field Tech Tool</div>
     <h1>Transition Request Form</h1>
-    <p>Enter your dimensions to get a real-time front and side view drawing. Submit the form and K&E Sheet Metal will confirm your order.</p>
+    <p>Enter dimensions to get a live front and side view drawing. Submit the completed form and K&E Sheet Metal will confirm your order within one business day.</p>
     <div class="calc-badges">
-      <span class="calc-badge">Front View</span>
-      <span class="calc-badge">Side View</span>
+      <span class="calc-badge">Live 2D Drawing</span>
+      <span class="calc-badge">Front &amp; Side View</span>
+      <span class="calc-badge">Edge Gap Support</span>
       <span class="calc-badge">Mobile Friendly</span>
     </div>
   </div>
 </div>
 
-<!-- ═══ FORM + PREVIEW ════════════════════════════════════════ -->
+<!-- ═══ FORM ══════════════════════════════════════════════════ -->
 <div class="form-body">
 
-  <!-- INPUT PANEL -->
+  <!-- LEFT: INPUT PANEL -->
   <div class="input-panel">
-    <h2>Order Details</h2>
 
-    <div class="section-sub">Your Info</div>
-    <div class="field-group">
-      <label>Name</label>
-      <input type="text" id="tech-name" placeholder="Your name" />
-    </div>
-    <div class="field-group">
-      <label>Company</label>
-      <input type="text" id="tech-company" placeholder="Company name" />
-    </div>
-    <div class="field-group">
-      <label>Email</label>
-      <input type="email" id="tech-email" placeholder="your@email.com" />
-    </div>
-
-    <hr class="divider-line" />
-
-    <div class="section-sub">Connection 1</div>
-    <div class="field-group">
-      <label>Width (left to right)</label>
-      <div class="field-row">
-        <input type="number" id="w1" min="1" max="120" placeholder="e.g. 24" oninput="update()" />
-        <span class="unit-label">in</span>
+    <!-- Contact -->
+    <div class="panel-section">
+      <div class="panel-section-title">Your Info</div>
+      <div class="field-group">
+        <label>Name</label>
+        <input type="text" id="tech-name" placeholder="Your name" />
+      </div>
+      <div class="field-group">
+        <label>Company</label>
+        <input type="text" id="tech-company" placeholder="Company name" />
+      </div>
+      <div class="field-group">
+        <label>Email</label>
+        <input type="email" id="tech-email" placeholder="your@email.com" />
       </div>
     </div>
-    <div class="field-group">
-      <label>Depth (front to back)</label>
-      <div class="field-row">
-        <input type="number" id="d1" min="1" max="120" placeholder="e.g. 12" oninput="update()" />
-        <span class="unit-label">in</span>
+
+    <!-- Connection 1 (Bottom) -->
+    <div class="panel-section">
+      <div class="panel-section-title">Connection 1 — Bottom Opening</div>
+      <div class="field-group">
+        <label>Dimensions</label>
+        <div class="dim-grid">
+          <div class="dim-col">
+            <input type="number" id="bottom-width" placeholder="Width" value="" oninput="calculate()" />
+            <span class="dim-col-label">Width — left to right</span>
+          </div>
+          <div class="dim-col">
+            <input type="number" id="bottom-height" placeholder="Depth" value="" oninput="calculate()" />
+            <span class="dim-col-label">Depth — front to back</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Connection Type</label>
+        <select id="bottom-connection" onchange="calculate()">
+          <option value="plenum-bend">Plenum Bend</option>
+          <option value="1in-outside-flange">1" Outside Flange</option>
+          <option value="1in-inside-flange">1" Inside Flange</option>
+          <option value="s-lock">S-Lock</option>
+        </select>
       </div>
     </div>
-    <div class="field-group">
-      <label>Connection 1 Type</label>
-      <select id="conn1">
-        <option value="Slip & Drive">Slip &amp; Drive</option>
-        <option value="TDC / TDF Flange">TDC / TDF Flange</option>
-        <option value="Raw Edge">Raw Edge</option>
-      </select>
-    </div>
 
-    <hr class="divider-line" />
-
-    <div class="section-sub">Connection 2</div>
-    <div class="field-group">
-      <label>Width (left to right)</label>
-      <div class="field-row">
-        <input type="number" id="w2" min="1" max="120" placeholder="e.g. 16" oninput="update()" />
-        <span class="unit-label">in</span>
+    <!-- Connection 2 (Top) -->
+    <div class="panel-section">
+      <div class="panel-section-title">Connection 2 — Top Opening</div>
+      <div class="field-group">
+        <label>Dimensions</label>
+        <div class="dim-grid">
+          <div class="dim-col">
+            <input type="number" id="top-width" placeholder="Width" value="" oninput="calculate()" />
+            <span class="dim-col-label">Width — left to right</span>
+          </div>
+          <div class="dim-col">
+            <input type="number" id="top-height" placeholder="Depth" value="" oninput="calculate()" />
+            <span class="dim-col-label">Depth — front to back</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Connection Type</label>
+        <select id="top-connection" onchange="calculate()">
+          <option value="plenum-bend">Plenum Bend</option>
+          <option value="1in-outside-flange">1" Outside Flange</option>
+          <option value="1in-inside-flange">1" Inside Flange</option>
+          <option value="s-lock" selected>S-Lock</option>
+          <option value="capped">Capped (Solid Top)</option>
+        </select>
       </div>
     </div>
-    <div class="field-group">
-      <label>Depth (front to back)</label>
-      <div class="field-row">
-        <input type="number" id="d2" min="1" max="120" placeholder="e.g. 8" oninput="update()" />
-        <span class="unit-label">in</span>
+
+    <!-- Height -->
+    <div class="panel-section">
+      <div class="panel-section-title">Height &amp; Edge Gaps</div>
+      <div class="field-group">
+        <label>Height (to connection point)</label>
+        <input type="number" id="length" placeholder="Height in inches" oninput="calculate()" />
+        <span class="field-hint">Vertical distance between connections</span>
+      </div>
+
+      <div class="gap-info">
+        <strong>How to measure edge gaps:</strong><br>
+        <strong>Positive (+):</strong> Top duct extends beyond bottom opening<br>
+        <strong>Negative (−):</strong> Bottom opening extends beyond top duct
+      </div>
+
+      <div class="field-group">
+        <label>Left / Right Edge Gaps</label>
+        <div class="dim-grid">
+          <div class="dim-col">
+            <input type="number" step="0.125" id="gap-left-input" placeholder="0" value="0" oninput="calculateOppositeGap('left')" />
+            <span class="dim-col-label">Left gap</span>
+          </div>
+          <div class="dim-col">
+            <input type="number" step="0.125" id="gap-right-input" placeholder="0" value="0" oninput="calculateOppositeGap('right')" />
+            <span class="dim-col-label">Right gap (auto)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Front / Back Edge Gaps</label>
+        <div class="dim-grid">
+          <div class="dim-col">
+            <input type="number" step="0.125" id="gap-front-input" placeholder="0" value="0" oninput="calculateOppositeGap('front')" />
+            <span class="dim-col-label">Front gap</span>
+          </div>
+          <div class="dim-col">
+            <input type="number" step="0.125" id="gap-back-input" placeholder="0" value="0" oninput="calculateOppositeGap('back')" />
+            <span class="dim-col-label">Back gap (auto)</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="field-group">
-      <label>Connection 2 Type</label>
-      <select id="conn2">
-        <option value="Slip & Drive">Slip &amp; Drive</option>
-        <option value="TDC / TDF Flange">TDC / TDF Flange</option>
-        <option value="Raw Edge">Raw Edge</option>
-      </select>
-    </div>
 
-    <hr class="divider-line" />
-
-    <div class="section-sub">Transition Details</div>
-    <div class="field-group">
-      <label>Length</label>
-      <div class="field-row">
-        <input type="number" id="len" min="1" max="120" placeholder="e.g. 12" oninput="update()" />
-        <span class="unit-label">in</span>
+    <!-- Specs -->
+    <div class="panel-section">
+      <div class="panel-section-title">Specifications</div>
+      <div class="field-group">
+        <label>Material Gauge</label>
+        <select id="gauge" onchange="calculate()">
+          <option value="26 4X8 G90" selected>26 Gauge G90 (Residential)</option>
+          <option value="24 4x8 G90">24 Gauge G90 (Commercial)</option>
+          <option value="22 4x8 G90">22 Gauge G90 (Heavy Duty)</option>
+          <option value="20 4x8 G90">20 Gauge G90 (Industrial)</option>
+          <option value=".040 4x8 3003-H14 Aluminum">Aluminum .040 3003-H14</option>
+          <option value=".050 4x8 5052-H32 Aluminum">Aluminum .050 5052-H32</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Quantity</label>
+        <input type="number" id="quantity" value="1" min="1" oninput="calculate()" />
+      </div>
+      <div class="field-group">
+        <label>Notes</label>
+        <textarea id="notes" rows="3" placeholder="Job name, special instructions, delivery needs..." style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:9px 12px;outline:none;resize:vertical;"></textarea>
       </div>
     </div>
-    <div class="field-group">
-      <label>Offset</label>
-      <select id="offset" onchange="update()">
-        <option value="Centered">Centered (no offset)</option>
-        <option value="Left">Offset Left</option>
-        <option value="Right">Offset Right</option>
-        <option value="Top">Offset Top</option>
-        <option value="Bottom">Offset Bottom</option>
-      </select>
-    </div>
-    <div class="field-group">
-      <label>Gauge</label>
-      <select id="gauge">
-        <option value="26 ga">26 gauge (residential)</option>
-        <option value="24 ga" selected>24 gauge (standard)</option>
-        <option value="22 ga">22 gauge (heavy)</option>
-        <option value="20 ga">20 gauge (commercial)</option>
-      </select>
-    </div>
-    <div class="field-group">
-      <label>Quantity</label>
-      <input type="number" id="qty" min="1" max="99" value="1" />
-    </div>
-    <div class="field-group">
-      <label>Notes</label>
-      <textarea id="notes" placeholder="Job name, special instructions, delivery needs..."></textarea>
+
+    <!-- Buttons -->
+    <div class="panel-buttons">
+      <button class="submit-btn" onclick="submitOrder()">Submit Order to K&amp;E →</button>
+      <button class="secondary-btn" onclick="printOrder()">Print Order</button>
+      <button class="secondary-btn" onclick="resetForm()">Reset</button>
     </div>
 
-    <hr class="divider-line" />
-
-    <button class="submit-btn" onclick="submitOrder()">Submit Order to K&amp;E →</button>
-    <button class="reset-btn" onclick="resetForm()">Reset</button>
   </div>
 
   <!-- RIGHT PANEL -->
@@ -423,33 +484,47 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
 
     <!-- Drawing -->
     <div class="drawing-card">
-      <div class="drawing-card-header">
-        <span class="drawing-card-title">Live Drawing</span>
+      <div class="card-header">
+        <span class="card-title">Live Drawing — Front &amp; Side View</span>
         <span style="font-size:11px;color:var(--text-muted);" id="drawing-dims">Enter dimensions</span>
       </div>
-      <div class="drawing-canvas-wrap">
-        <div class="drawing-view">
-          <span class="drawing-view-label">Front View</span>
-          <svg id="front-canvas" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
-            <text x="100" y="115" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="#7d7870">—</text>
-          </svg>
+      <div class="canvas-wrap">
+        <canvas id="drawing-canvas" width="800" height="400"></canvas>
+      </div>
+    </div>
+
+    <!-- Material Requirements -->
+    <div class="material-card">
+      <div class="card-header">
+        <span class="card-title">Material Requirements</span>
+      </div>
+      <div class="material-grid">
+        <div class="material-item">
+          <div class="m-label">Square Feet</div>
+          <div class="m-value" id="material-sqft">—</div>
         </div>
-        <div class="drawing-view">
-          <span class="drawing-view-label">Side View</span>
-          <svg id="side-canvas" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
-            <text x="100" y="115" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="#7d7870">—</text>
-          </svg>
+        <div class="material-item">
+          <div class="m-label">Weight (lbs)</div>
+          <div class="m-value" id="material-weight">—</div>
+        </div>
+        <div class="material-item">
+          <div class="m-label">Slip Cleats</div>
+          <div class="m-value" id="slip-cleats">—</div>
+        </div>
+        <div class="material-item">
+          <div class="m-label">Drive Cleats</div>
+          <div class="m-value" id="drive-cleats">—</div>
         </div>
       </div>
     </div>
 
     <!-- Order Summary -->
     <div class="summary-card">
-      <div class="summary-card-header">
-        <span class="summary-card-title">Order Summary</span>
+      <div class="card-header">
+        <span class="card-title">Order Summary</span>
       </div>
       <div class="summary-body" id="summary-body">
-        <p class="summary-empty">Enter dimensions to see order summary.</p>
+        <div class="summary-row"><span class="s-label">Status</span><span class="s-value" style="color:var(--text-muted);">Enter dimensions to populate</span></div>
       </div>
     </div>
 
@@ -464,203 +539,399 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
 </div>
 
 <script>
-const brass = '#c8912a', dim = '#4e8fb5', muted = '#7d7870', surf = '#1c1e21', surf2 = '#232629';
+// ─── MATERIAL DATA ───────────────────────────────────────────
+const MATERIAL_DATA = {
+  '26 4X8 G90':                  { lbs_per_sqft: 0.906 },
+  '24 4x8 G90':                  { lbs_per_sqft: 1.156 },
+  '22 4x8 G90':                  { lbs_per_sqft: 1.406 },
+  '20 4x8 G90':                  { lbs_per_sqft: 1.656 },
+  '.040 4x8 3003-H14 Aluminum':  { lbs_per_sqft: 0.577 },
+  '.050 4x8 5052-H32 Aluminum':  { lbs_per_sqft: 0.729 },
+};
 
-function drawFront(w1, d1, w2, d2, offset) {
-  // Front view: width (left-right) × depth (front-back) shown as height
-  const VW = 200, VH = 220, pad = 36;
-  const maxW = Math.max(w1, w2, 1);
-  const maxD = Math.max(d1, d2, 1);
-  const scale = Math.min((VW - pad * 2) / maxW, (VH - pad * 2 - 30) / maxD);
+// ─── CANVAS RESIZE ───────────────────────────────────────────
+function resizeCanvas() {
+  const canvas = document.getElementById('drawing-canvas');
+  const wrap   = canvas.parentElement;
+  const w      = wrap.clientWidth - 40;
+  canvas.style.width = '100%';
+  if (window.innerWidth <= 600) {
+    canvas.width  = Math.min(w, 600);
+    canvas.height = canvas.width * 1.6;
+  } else {
+    canvas.width  = Math.min(w, 800);
+    canvas.height = Math.round(canvas.width * 0.5);
+  }
+  calculate();
+}
+window.addEventListener('load', resizeCanvas);
+window.addEventListener('resize', resizeCanvas);
 
-  const dw1 = w1 * scale, dd1 = d1 * scale;
-  const dw2 = w2 * scale, dd2 = d2 * scale;
-  const cx = VW / 2;
-  const yBot = VH - pad, yTop = yBot - dd1;
+// ─── AUTO OPPOSITE GAP ───────────────────────────────────────
+function calculateOppositeGap(changed) {
+  const tw = parseFloat(document.getElementById('top-width').value)   || 0;
+  const th = parseFloat(document.getElementById('top-height').value)  || 0;
+  const bw = parseFloat(document.getElementById('bottom-width').value)  || 0;
+  const bh = parseFloat(document.getElementById('bottom-height').value) || 0;
+  if (!tw || !th || !bw || !bh) { calculate(); return; }
 
-  let xShift = 0;
-  if (offset === 'Left')  xShift = -(dw1 - dw2) / 2;
-  if (offset === 'Right') xShift =  (dw1 - dw2) / 2;
-
-  let yShift = 0;
-  if (offset === 'Top')    yShift = -(dd1 - dd2);
-  if (offset === 'Bottom') yShift =  (dd1 - dd2);
-
-  const lx1 = cx - dw1/2, lx2 = cx + dw1/2;
-  const sx1 = cx - dw2/2 + xShift, sx2 = cx + dw2/2 + xShift;
-  const syTop = yTop + yShift, syBot = yTop + dd2 + yShift;
-
-  return `
-    <rect x="${lx1}" y="${yTop}" width="${dw1}" height="${dd1}" fill="${surf}" stroke="${brass}" stroke-width="1.5"/>
-    <rect x="${sx1}" y="${syTop}" width="${dw2}" height="${dd2}" fill="${surf2}" stroke="${brass}" stroke-width="1.5" stroke-dasharray="4 2"/>
-    <line x1="${lx1}" y1="${yTop}"  x2="${sx1}" y2="${syTop}" stroke="${muted}" stroke-width="1" stroke-dasharray="2 2"/>
-    <line x1="${lx2}" y1="${yTop}"  x2="${sx2}" y2="${syTop}" stroke="${muted}" stroke-width="1" stroke-dasharray="2 2"/>
-    <line x1="${lx1}" y1="${yBot}"  x2="${sx1}" y2="${syBot}" stroke="${muted}" stroke-width="1" stroke-dasharray="2 2"/>
-    <line x1="${lx2}" y1="${yBot}"  x2="${sx2}" y2="${syBot}" stroke="${muted}" stroke-width="1" stroke-dasharray="2 2"/>
-    <!-- W1 dim -->
-    <line x1="${lx1}" y1="${yBot+12}" x2="${lx2}" y2="${yBot+12}" stroke="${dim}" stroke-width="1"/>
-    <line x1="${lx1}" y1="${yBot+9}"  x2="${lx1}" y2="${yBot+15}" stroke="${dim}" stroke-width="1"/>
-    <line x1="${lx2}" y1="${yBot+9}"  x2="${lx2}" y2="${yBot+15}" stroke="${dim}" stroke-width="1"/>
-    <text x="${cx}" y="${yBot+24}" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="${dim}">${w1}"W</text>
-    <!-- D1 dim -->
-    <line x1="${lx1-12}" y1="${yTop}" x2="${lx1-12}" y2="${yBot}" stroke="${dim}" stroke-width="1"/>
-    <line x1="${lx1-15}" y1="${yTop}" x2="${lx1-9}"  y2="${yTop}" stroke="${dim}" stroke-width="1"/>
-    <line x1="${lx1-15}" y1="${yBot}" x2="${lx1-9}"  y2="${yBot}" stroke="${dim}" stroke-width="1"/>
-    <text x="${lx1-22}" y="${(yTop+yBot)/2+4}" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="${dim}" transform="rotate(-90,${lx1-22},${(yTop+yBot)/2+4})">${d1}"D</text>
-    <!-- Conn labels -->
-    <text x="${cx}" y="${(yTop+yBot)/2+4}" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="10" fill="${brass}" opacity="0.5">CONN 1</text>
-    <text x="${(sx1+sx2)/2}" y="${syTop-6}" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8" fill="${muted}">${w2}"W × ${d2}"D</text>
-  `;
+  if (changed === 'left') {
+    const gl = parseFloat(document.getElementById('gap-left-input').value) || 0;
+    document.getElementById('gap-right-input').value = ((tw - bw) - gl).toFixed(3);
+  } else if (changed === 'right') {
+    const gr = parseFloat(document.getElementById('gap-right-input').value) || 0;
+    document.getElementById('gap-left-input').value  = ((tw - bw) - gr).toFixed(3);
+  } else if (changed === 'front') {
+    const gf = parseFloat(document.getElementById('gap-front-input').value) || 0;
+    document.getElementById('gap-back-input').value  = ((th - bh) - gf).toFixed(3);
+  } else if (changed === 'back') {
+    const gb = parseFloat(document.getElementById('gap-back-input').value) || 0;
+    document.getElementById('gap-front-input').value = ((th - bh) - gb).toFixed(3);
+  }
+  calculate();
 }
 
-function drawSide(w1, d1, w2, d2, len, offset) {
-  // Side view: length (horizontal) × depth (vertical)
-  const VW = 200, VH = 220, pad = 36;
-  const maxLen = Math.max(len || 12, 1);
-  const maxD   = Math.max(d1, d2, 1);
-  const scale  = Math.min((VW - pad * 2) / maxLen, (VH - pad * 2 - 30) / maxD);
+// ─── MAIN CALCULATE ──────────────────────────────────────────
+function calculate() {
+  const bw  = parseFloat(document.getElementById('bottom-width').value)  || 0;
+  const bh  = parseFloat(document.getElementById('bottom-height').value) || 0;
+  const tw  = parseFloat(document.getElementById('top-width').value)     || 0;
+  const th  = parseFloat(document.getElementById('top-height').value)    || 0;
+  const len = parseFloat(document.getElementById('length').value)        || 0;
+  const qty = parseInt(document.getElementById('quantity').value)        || 1;
+  const gauge    = document.getElementById('gauge').value;
+  const topConn  = document.getElementById('top-connection').value;
+  const botConn  = document.getElementById('bottom-connection').value;
 
-  const dLen = maxLen * scale;
-  const dd1  = d1 * scale;
-  const dd2  = d2 * scale;
-  const cx   = VW / 2;
-  const yBot = VH - pad;
-  const yTop = yBot - dd1;
+  const gapLeft  = parseFloat(document.getElementById('gap-left-input').value)  || 0;
+  const gapRight = parseFloat(document.getElementById('gap-right-input').value) || 0;
+  const gapFront = parseFloat(document.getElementById('gap-front-input').value) || 0;
+  const gapBack  = parseFloat(document.getElementById('gap-back-input').value)  || 0;
 
-  let yShift = 0;
-  if (offset === 'Top')    yShift = -(dd1 - dd2);
-  if (offset === 'Bottom') yShift =  (dd1 - dd2);
+  const offsetH = (gapLeft - gapRight) / 2;
+  const offsetV = (gapFront - gapBack) / 2;
 
-  const x1 = cx - dLen/2, x2 = cx + dLen/2;
-  const syTop = yTop + yShift, syBot = yTop + dd2 + yShift;
-
-  return `
-    <!-- Conn 1 face (left) -->
-    <line x1="${x1}" y1="${yTop}" x2="${x1}" y2="${yBot}" stroke="${brass}" stroke-width="2"/>
-    <!-- Conn 2 face (right) -->
-    <line x1="${x2}" y1="${syTop}" x2="${x2}" y2="${syBot}" stroke="${brass}" stroke-width="2" stroke-dasharray="4 2"/>
-    <!-- Top taper -->
-    <line x1="${x1}" y1="${yTop}" x2="${x2}" y2="${syTop}" stroke="${brass}" stroke-width="1.5"/>
-    <!-- Bottom taper -->
-    <line x1="${x1}" y1="${yBot}" x2="${x2}" y2="${syBot}" stroke="${brass}" stroke-width="1.5"/>
-    <!-- Fill -->
-    <polygon points="${x1},${yTop} ${x2},${syTop} ${x2},${syBot} ${x1},${yBot}" fill="${surf}" opacity="0.6"/>
-    <!-- Length dim -->
-    <line x1="${x1}" y1="${yBot+12}" x2="${x2}" y2="${yBot+12}" stroke="${dim}" stroke-width="1"/>
-    <line x1="${x1}" y1="${yBot+9}"  x2="${x1}" y2="${yBot+15}" stroke="${dim}" stroke-width="1"/>
-    <line x1="${x2}" y1="${yBot+9}"  x2="${x2}" y2="${yBot+15}" stroke="${dim}" stroke-width="1"/>
-    <text x="${cx}" y="${yBot+24}" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="${dim}">${len || '?'}"L</text>
-    <!-- D1 dim -->
-    <line x1="${x1-12}" y1="${yTop}" x2="${x1-12}" y2="${yBot}" stroke="${dim}" stroke-width="1"/>
-    <line x1="${x1-15}" y1="${yTop}" x2="${x1-9}"  y2="${yTop}" stroke="${dim}" stroke-width="1"/>
-    <line x1="${x1-15}" y1="${yBot}" x2="${x1-9}"  y2="${yBot}" stroke="${dim}" stroke-width="1"/>
-    <text x="${x1-22}" y="${(yTop+yBot)/2+4}" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="${dim}" transform="rotate(-90,${x1-22},${(yTop+yBot)/2+4})">${d1}"D</text>
-    <!-- Labels -->
-    <text x="${x1+4}" y="${(yTop+yBot)/2+4}" font-family="'Bebas Neue',sans-serif" font-size="9" fill="${brass}" opacity="0.6">C1</text>
-    <text x="${x2-18}" y="${(syTop+syBot)/2+4}" font-family="'Bebas Neue',sans-serif" font-size="9" fill="${brass}" opacity="0.5">C2</text>
-  `;
-}
-
-function update() {
-  const w1     = parseFloat(document.getElementById('w1').value)  || 0;
-  const d1     = parseFloat(document.getElementById('d1').value)  || 0;
-  const w2     = parseFloat(document.getElementById('w2').value)  || 0;
-  const d2     = parseFloat(document.getElementById('d2').value)  || 0;
-  const len    = parseFloat(document.getElementById('len').value) || 0;
-  const offset = document.getElementById('offset').value;
-
+  // Update drawing label
   document.getElementById('drawing-dims').textContent =
-    (w1 && d1 && w2 && d2) ? `${w1}"×${d1}" → ${w2}"×${d2}"` : 'Enter dimensions';
+    (bw && bh && tw && th) ? `${bw}"×${bh}" → ${tw}"×${th}"` : 'Enter dimensions';
 
-  if (w1 > 0 && d1 > 0 && w2 > 0 && d2 > 0) {
-    document.getElementById('front-canvas').innerHTML = drawFront(w1, d1, w2, d2, offset);
-    document.getElementById('side-canvas').innerHTML  = drawSide(w1, d1, w2, d2, len, offset);
-  }
-
-  if (w1 > 0 && d1 > 0 && w2 > 0 && d2 > 0) {
-    const gauge  = document.getElementById('gauge').value;
-    const conn1  = document.getElementById('conn1').value;
-    const conn2  = document.getElementById('conn2').value;
-    const qty    = document.getElementById('qty').value || 1;
-
-    document.getElementById('summary-body').innerHTML = `
-      <div class="summary-row"><span class="s-label">Connection 1</span><span class="s-value">${w1}" W × ${d1}" D</span></div>
-      <div class="summary-row"><span class="s-label">Connection 2</span><span class="s-value">${w2}" W × ${d2}" D</span></div>
-      <div class="summary-row"><span class="s-label">Length</span><span class="s-value">${len || '—'}"</span></div>
-      <div class="summary-row"><span class="s-label">Offset</span><span class="s-value">${offset}</span></div>
-      <div class="summary-row"><span class="s-label">Gauge</span><span class="s-value">${gauge}</span></div>
-      <div class="summary-row"><span class="s-label">Conn 1 Type</span><span class="s-value">${conn1}</span></div>
-      <div class="summary-row"><span class="s-label">Conn 2 Type</span><span class="s-value">${conn2}</span></div>
-      <div class="summary-row"><span class="s-label">Quantity</span><span class="s-value">${qty}</span></div>
-    `;
-  }
-}
-
-function submitOrder() {
-  const name  = document.getElementById('tech-name').value.trim();
-  const w1    = document.getElementById('w1').value;
-  const d1    = document.getElementById('d1').value;
-  const w2    = document.getElementById('w2').value;
-  const d2    = document.getElementById('d2').value;
-  const len   = document.getElementById('len').value;
-
-  if (!name) { alert('Please enter your name.'); return; }
-  if (!w1 || !d1 || !w2 || !d2 || !len) {
-    alert('Please enter all transition dimensions.');
+  if (!bw || !bh || !tw || !th || !len) {
+    drawPlaceholder();
     return;
   }
 
-  const company = document.getElementById('tech-company').value;
-  const email   = document.getElementById('tech-email').value;
-  const qty     = document.getElementById('qty').value;
-  const gauge   = document.getElementById('gauge').value;
-  const offset  = document.getElementById('offset').value;
-  const conn1   = document.getElementById('conn1').value;
-  const conn2   = document.getElementById('conn2').value;
-  const notes   = document.getElementById('notes').value;
+  // Material
+  const topPerim = (tw + th) * 2;
+  const botPerim = (bw + bh) * 2;
+  const avgPerim = (topPerim + botPerim) / 2;
+  let sqft = (avgPerim * len / 144) * qty * 1.10 * 1.25;
+  const mat = MATERIAL_DATA[gauge] || { lbs_per_sqft: 1.0 };
+  let weight = sqft * mat.lbs_per_sqft;
+
+  if (topConn === 'capped') {
+    const capSqft = (tw * th) / 144 * qty * 1.25;
+    sqft   += capSqft;
+    weight += capSqft * mat.lbs_per_sqft;
+  }
+
+  const slipFt  = ((Math.max(tw, bw) - 0.5) * 2 / 12) * qty;
+  const driveFt = ((Math.max(th, bh) + 2)   * 2 / 12) * qty;
+
+  document.getElementById('material-sqft').textContent   = sqft.toFixed(2) + ' sq ft';
+  document.getElementById('material-weight').textContent = weight.toFixed(2) + ' lbs';
+  document.getElementById('slip-cleats').textContent     = slipFt.toFixed(2) + ' ft';
+  document.getElementById('drive-cleats').textContent    = driveFt.toFixed(2) + ' ft';
+
+  // Summary
+  const connMap = {
+    'plenum-bend': 'Plenum Bend',
+    '1in-outside-flange': '1" Outside Flange',
+    '1in-inside-flange': '1" Inside Flange',
+    's-lock': 'S-Lock',
+    'capped': 'Capped'
+  };
+  document.getElementById('summary-body').innerHTML = `
+    <div class="summary-row"><span class="s-label">Conn 1 (Bottom)</span><span class="s-value">${bw}" W × ${bh}" D — ${connMap[botConn]}</span></div>
+    <div class="summary-row"><span class="s-label">Conn 2 (Top)</span><span class="s-value">${tw}" W × ${th}" D — ${connMap[topConn]}</span></div>
+    <div class="summary-row"><span class="s-label">Height</span><span class="s-value">${len}"</span></div>
+    <div class="summary-row"><span class="s-label">Edge Gaps</span><span class="s-value">L:${gapLeft}" R:${gapRight}" F:${gapFront}" B:${gapBack}"</span></div>
+    <div class="summary-row"><span class="s-label">Gauge</span><span class="s-value">${gauge}</span></div>
+    <div class="summary-row"><span class="s-label">Quantity</span><span class="s-value">${qty}</span></div>
+  `;
+
+  // Draw
+  drawTransition(offsetH, offsetV, gapLeft, gapRight, gapFront, gapBack);
+}
+
+// ─── DRAWING ─────────────────────────────────────────────────
+function drawPlaceholder() {
+  const canvas = document.getElementById('drawing-canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#4e5157';
+  ctx.font = '14px DM Sans, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Enter dimensions to see drawing', canvas.width / 2, canvas.height / 2);
+}
+
+function drawTransition(offsetH, offsetV, gapLeft, gapRight, gapFront, gapBack) {
+  const canvas = document.getElementById('drawing-canvas');
+  const ctx    = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  const bw  = parseFloat(document.getElementById('bottom-width').value)  || 0;
+  const bh  = parseFloat(document.getElementById('bottom-height').value) || 0;
+  const tw  = parseFloat(document.getElementById('top-width').value)     || 0;
+  const th  = parseFloat(document.getElementById('top-height').value)    || 0;
+  const len = parseFloat(document.getElementById('length').value)        || 0;
+  const topConn = document.getElementById('top-connection').value;
+  const botConn = document.getElementById('bottom-connection').value;
+
+  const isMobile = window.innerWidth <= 600;
+
+  if (isMobile) {
+    const vh = H / 2;
+    drawFrontView(ctx, 0, 0, W, vh, bw, tw, len, offsetH, gapLeft, gapRight, topConn, botConn);
+    ctx.strokeStyle = '#2e3135'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(20, vh); ctx.lineTo(W-20, vh); ctx.stroke();
+    drawSideView(ctx, 0, vh, W, vh, bh, th, len, offsetV, gapFront, gapBack, topConn, botConn);
+  } else {
+    const hw = W / 2;
+    drawFrontView(ctx, 0, 0, hw, H, bw, tw, len, offsetH, gapLeft, gapRight, topConn, botConn);
+    ctx.strokeStyle = '#2e3135'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(hw, 30); ctx.lineTo(hw, H-30); ctx.stroke();
+    drawSideView(ctx, hw, 0, hw, H, bh, th, len, offsetV, gapFront, gapBack, topConn, botConn);
+  }
+}
+
+function drawFrontView(ctx, x, y, w, h, bw, tw, len, offsetX, gapLeft, gapRight, topConn, botConn) {
+  const cx     = x + w / 2;
+  const topY   = y + h * 0.22;
+  const botY   = y + h * 0.78;
+  const maxW   = Math.max(bw, tw) + Math.abs(offsetX) * 2 + 10;
+  const scale  = Math.min((w * 0.65) / maxW, (h * 0.45) / len);
+
+  const tLeft  = cx - (tw * scale) / 2;
+  const tRight = cx + (tw * scale) / 2;
+  const bLeft  = cx - (bw * scale) / 2 + offsetX * scale;
+  const bRight = cx + (bw * scale) / 2 + offsetX * scale;
+
+  // Top rect (Conn 2)
+  ctx.fillStyle = topConn === 'capped' ? '#2e3e50' : topConn === 's-lock' ? '#233040' : '#1e2830';
+  ctx.fillRect(tLeft, topY - 8, tw * scale, 16);
+  ctx.strokeStyle = '#c8912a'; ctx.lineWidth = 2;
+  ctx.strokeRect(tLeft, topY - 8, tw * scale, 16);
+
+  // Bottom rect (Conn 1)
+  ctx.fillStyle = '#1c2535';
+  ctx.fillRect(bLeft, botY - 8, bw * scale, 16);
+  ctx.strokeStyle = '#c8912a'; ctx.lineWidth = 2;
+  ctx.strokeRect(bLeft, botY - 8, bw * scale, 16);
+
+  // Taper lines
+  ctx.strokeStyle = '#4e5a6a'; ctx.lineWidth = 1.5;
+  [[tLeft, topY-8, bLeft, botY-8],[tRight, topY-8, bRight, botY-8],
+   [tLeft, topY+8, bLeft, botY+8],[tRight, topY+8, bRight, botY+8]].forEach(([x1,y1,x2,y2]) => {
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  });
+
+  // Dims
+  ctx.strokeStyle = '#4e8fb5'; ctx.fillStyle = '#4e8fb5'; ctx.lineWidth = 1;
+  ctx.font = 'bold 11px DM Sans, sans-serif'; ctx.textAlign = 'center';
+  drawDimLine(ctx, tLeft, topY-20, tRight, topY-20);
+  ctx.fillText(`${tw}"`, cx, topY-28);
+  drawDimLine(ctx, bLeft, botY+22, bRight, botY+22);
+  ctx.fillText(`${bw}"`, bLeft+(bw*scale)/2, botY+36);
+
+  ctx.fillStyle = '#c8912a';
+  const hx = Math.min(tLeft, bLeft) - 36;
+  drawDimLine(ctx, hx, topY, hx, botY);
+  ctx.save(); ctx.translate(hx-12, (topY+botY)/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.fillText(`${len}"`, 0, 4);
+  ctx.restore();
+
+  // Gap annotations
+  if (gapLeft !== 0 || gapRight !== 0) {
+    ctx.font = '9px DM Sans, sans-serif'; ctx.fillStyle = '#b84a3a';
+    ctx.textAlign = 'right';
+    ctx.fillText(gapAnnotation(gapLeft, 'L'), Math.min(tLeft,bLeft)-4, (topY+botY)/2+4);
+    ctx.textAlign = 'left';
+    ctx.fillText(gapAnnotation(gapRight, 'R'), Math.max(tRight,bRight)+4, (topY+botY)/2+4);
+    if (Math.abs(offsetX) > 0.01) {
+      ctx.strokeStyle = '#b84a3a'; ctx.lineWidth = 1; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(cx, topY+8); ctx.lineTo(cx, botY-8); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
+
+  // Labels
+  ctx.fillStyle = '#ede8df'; ctx.font = 'bold 12px DM Sans, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('FRONT VIEW', cx, y+16);
+  ctx.font = '9px DM Sans, sans-serif'; ctx.fillStyle = '#7d7870';
+  ctx.fillText('CONN 2 (Top)', cx, topY-40);
+  ctx.fillText('CONN 1 (Bottom)', bLeft+(bw*scale)/2, botY+50);
+}
+
+function drawSideView(ctx, x, y, w, h, bh, th, len, offsetY, gapFront, gapBack, topConn, botConn) {
+  const cx    = x + w / 2;
+  const topY  = y + h * 0.22;
+  const botY  = y + h * 0.78;
+  const maxD  = Math.max(bh, th) + Math.abs(offsetY) * 2 + 10;
+  const scale = Math.min((w * 0.65) / maxD, (h * 0.45) / len);
+
+  const tLeft  = cx - (th * scale) / 2;
+  const tRight = cx + (th * scale) / 2;
+  const bLeft  = cx - (bh * scale) / 2 + offsetY * scale;
+  const bRight = cx + (bh * scale) / 2 + offsetY * scale;
+
+  ctx.fillStyle = topConn === 'capped' ? '#2e3e50' : '#1e2830';
+  ctx.fillRect(tLeft, topY-8, th*scale, 16);
+  ctx.strokeStyle = '#c8912a'; ctx.lineWidth = 2;
+  ctx.strokeRect(tLeft, topY-8, th*scale, 16);
+
+  ctx.fillStyle = '#1c2535';
+  ctx.fillRect(bLeft, botY-8, bh*scale, 16);
+  ctx.strokeStyle = '#c8912a'; ctx.lineWidth = 2;
+  ctx.strokeRect(bLeft, botY-8, bh*scale, 16);
+
+  ctx.strokeStyle = '#4e5a6a'; ctx.lineWidth = 1.5;
+  [[tLeft, topY-8, bLeft, botY-8],[tRight, topY-8, bRight, botY-8],
+   [tLeft, topY+8, bLeft, botY+8],[tRight, topY+8, bRight, botY+8]].forEach(([x1,y1,x2,y2]) => {
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  });
+
+  ctx.strokeStyle = '#4e8fb5'; ctx.fillStyle = '#4e8fb5'; ctx.lineWidth = 1;
+  ctx.font = 'bold 11px DM Sans, sans-serif'; ctx.textAlign = 'center';
+  drawDimLine(ctx, tLeft, topY-20, tRight, topY-20);
+  ctx.fillText(`${th}"`, cx, topY-28);
+  drawDimLine(ctx, bLeft, botY+22, bRight, botY+22);
+  ctx.fillText(`${bh}"`, bLeft+(bh*scale)/2, botY+36);
+
+  ctx.fillStyle = '#c8912a';
+  const hx = Math.min(tLeft, bLeft) - 36;
+  drawDimLine(ctx, hx, topY, hx, botY);
+  ctx.save(); ctx.translate(hx-12, (topY+botY)/2);
+  ctx.rotate(-Math.PI/2); ctx.fillText(`${len}"`, 0, 4); ctx.restore();
+
+  if (gapFront !== 0 || gapBack !== 0) {
+    ctx.font = '9px DM Sans, sans-serif'; ctx.fillStyle = '#b84a3a';
+    ctx.textAlign = 'right';
+    ctx.fillText(gapAnnotation(gapFront, 'F'), Math.min(tLeft,bLeft)-4, (topY+botY)/2+4);
+    ctx.textAlign = 'left';
+    ctx.fillText(gapAnnotation(gapBack, 'B'), Math.max(tRight,bRight)+4, (topY+botY)/2+4);
+    if (Math.abs(offsetY) > 0.01) {
+      ctx.strokeStyle = '#b84a3a'; ctx.lineWidth = 1; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(cx, topY+8); ctx.lineTo(cx, botY-8); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
+
+  ctx.fillStyle = '#ede8df'; ctx.font = 'bold 12px DM Sans, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('SIDE VIEW', cx, y+16);
+  ctx.font = '9px DM Sans, sans-serif'; ctx.fillStyle = '#7d7870';
+  ctx.fillText('CONN 2 (Top)', cx, topY-40);
+  ctx.fillText('CONN 1 (Bottom)', bLeft+(bh*scale)/2, botY+50);
+}
+
+function drawDimLine(ctx, x1, y1, x2, y2) {
+  const a = 4;
+  ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x1+a,y1-a); ctx.lineTo(x1+a,y1+a); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(x2,y2); ctx.lineTo(x2-a,y2-a); ctx.lineTo(x2-a,y2+a); ctx.closePath(); ctx.fill();
+}
+
+function gapAnnotation(gap, side) {
+  if (gap > 0.01)  return `${side}: +${gap.toFixed(2)}"`;
+  if (gap < -0.01) return `${side}: ${gap.toFixed(2)}"`;
+  return `${side}: flush`;
+}
+
+// ─── SUBMIT ──────────────────────────────────────────────────
+function submitOrder() {
+  const name = document.getElementById('tech-name').value.trim();
+  const bw   = document.getElementById('bottom-width').value;
+  const bh   = document.getElementById('bottom-height').value;
+  const tw   = document.getElementById('top-width').value;
+  const th   = document.getElementById('top-height').value;
+  const len  = document.getElementById('length').value;
+
+  if (!name)                        { alert('Please enter your name.'); return; }
+  if (!bw || !bh || !tw || !th || !len) { alert('Please enter all dimensions.'); return; }
+
+  const company  = document.getElementById('tech-company').value;
+  const email    = document.getElementById('tech-email').value;
+  const qty      = document.getElementById('quantity').value;
+  const gauge    = document.getElementById('gauge').value;
+  const botConn  = document.getElementById('bottom-connection').value;
+  const topConn  = document.getElementById('top-connection').value;
+  const gapLeft  = document.getElementById('gap-left-input').value;
+  const gapRight = document.getElementById('gap-right-input').value;
+  const gapFront = document.getElementById('gap-front-input').value;
+  const gapBack  = document.getElementById('gap-back-input').value;
+  const notes    = document.getElementById('notes').value;
+  const sqft     = document.getElementById('material-sqft').textContent;
+  const weight   = document.getElementById('material-weight').textContent;
+  const slip     = document.getElementById('slip-cleats').textContent;
+  const drive    = document.getElementById('drive-cleats').textContent;
 
   const body = `TRANSITION REQUEST — K&E Sheet Metal\n\n`
     + `FROM: ${name}\n`
     + `EMAIL: ${email || 'N/A'}\n`
     + `COMPANY: ${company || 'N/A'}\n\n`
     + `--- DIMENSIONS ---\n`
-    + `Connection 1: ${w1}" Wide × ${d1}" Deep\n`
-    + `Connection 2: ${w2}" Wide × ${d2}" Deep\n`
-    + `Length: ${len}"\n`
-    + `Offset: ${offset}\n\n`
+    + `Connection 1 (Bottom): ${bw}" Wide × ${bh}" Deep\n`
+    + `Connection 2 (Top):    ${tw}" Wide × ${th}" Deep\n`
+    + `Height: ${len}"\n\n`
+    + `--- EDGE GAPS ---\n`
+    + `Left: ${gapLeft}"   Right: ${gapRight}"\n`
+    + `Front: ${gapFront}"  Back: ${gapBack}"\n\n`
     + `--- SPECS ---\n`
     + `Gauge: ${gauge}\n`
-    + `Connection 1 Type: ${conn1}\n`
-    + `Connection 2 Type: ${conn2}\n`
+    + `Conn 1 Type: ${botConn}\n`
+    + `Conn 2 Type: ${topConn}\n`
     + `Quantity: ${qty}\n\n`
-    + `--- NOTES ---\n`
-    + (notes || 'None');
+    + `--- MATERIAL ---\n`
+    + `Sq Ft: ${sqft}\n`
+    + `Weight: ${weight}\n`
+    + `Slip Cleats: ${slip}\n`
+    + `Drive Cleats: ${drive}\n\n`
+    + `--- NOTES ---\n${notes || 'None'}`;
 
-  const subject = encodeURIComponent(`Transition Request — ${name} — ${w1}x${d1} to ${w2}x${d2}`);
-  const bodyEnc = encodeURIComponent(body);
-
-  window.location.href = `mailto:orders@kesheetmetal.com?subject=${subject}&body=${bodyEnc}`;
+  const subject = encodeURIComponent(`Transition Request — ${name} — ${bw}x${bh} to ${tw}x${th}`);
+  window.location.href = `mailto:orders@kesheetmetal.com?subject=${subject}&body=${encodeURIComponent(body)}`;
 
   document.getElementById('confirmation').style.display = 'block';
   document.getElementById('confirmation').scrollIntoView({ behavior: 'smooth' });
 }
 
+function printOrder() { window.print(); }
+
 function resetForm() {
-  ['tech-name','tech-company','tech-email','w1','d1','w2','d2','len','notes'].forEach(id => {
+  ['tech-name','tech-company','tech-email','bottom-width','bottom-height',
+   'top-width','top-height','length','notes'].forEach(id => {
     document.getElementById(id).value = '';
   });
-  document.getElementById('qty').value = '1';
-  document.getElementById('gauge').value = '24 ga';
-  document.getElementById('offset').value = 'Centered';
-  document.getElementById('conn1').value = 'Slip & Drive';
-  document.getElementById('conn2').value = 'Slip & Drive';
+  ['gap-left-input','gap-right-input','gap-front-input','gap-back-input'].forEach(id => {
+    document.getElementById(id).value = '0';
+  });
+  document.getElementById('quantity').value = '1';
+  document.getElementById('gauge').value = '26 4X8 G90';
+  document.getElementById('bottom-connection').value = 'plenum-bend';
+  document.getElementById('top-connection').value = 's-lock';
+  document.getElementById('material-sqft').textContent   = '—';
+  document.getElementById('material-weight').textContent = '—';
+  document.getElementById('slip-cleats').textContent     = '—';
+  document.getElementById('drive-cleats').textContent    = '—';
   document.getElementById('drawing-dims').textContent = 'Enter dimensions';
-  document.getElementById('front-canvas').innerHTML =
-    `<text x="100" y="115" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="#7d7870">—</text>`;
-  document.getElementById('side-canvas').innerHTML =
-    `<text x="100" y="115" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="#7d7870">—</text>`;
   document.getElementById('summary-body').innerHTML =
-    `<p class="summary-empty">Enter dimensions to see order summary.</p>`;
+    '<div class="summary-row"><span class="s-label">Status</span><span class="s-value" style="color:var(--text-muted);">Enter dimensions to populate</span></div>';
   document.getElementById('confirmation').style.display = 'none';
+  drawPlaceholder();
 }
+
+window.onload = function() { resizeCanvas(); };
 </script>
