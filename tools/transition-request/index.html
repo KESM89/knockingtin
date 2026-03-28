@@ -152,6 +152,48 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
 }
 .gap-info strong { color: var(--text); }
 
+/* ─── HELP SECTIONS ──────────────────────────────────────── */
+.help-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--steel);
+  padding: 0;
+  margin-bottom: 12px;
+  transition: color 0.15s;
+}
+.help-toggle:hover { color: var(--text); }
+.help-toggle .toggle-icon { font-size: 14px; transition: transform 0.2s; display: inline-block; }
+.help-toggle.open .toggle-icon { transform: rotate(90deg); }
+.help-panel {
+  display: none;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.help-panel.visible { display: block; }
+.help-panel strong { color: var(--text); }
+.help-panel h4 { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.06em; color: var(--brass); margin-bottom: 8px; margin-top: 12px; }
+.help-panel h4:first-child { margin-top: 0; }
+.help-panel ul { list-style: none; padding: 0; margin: 6px 0 0 0; display: flex; flex-direction: column; gap: 5px; }
+.help-panel ul li { padding-left: 14px; position: relative; }
+.help-panel ul li::before { content: '—'; position: absolute; left: 0; color: var(--brass); opacity: 0.6; }
+.help-panel .help-example { background: var(--surface); border-radius: 4px; padding: 10px 12px; margin-top: 10px; font-size: 11px; border-left: 2px solid var(--brass); }
+.help-panel .help-example strong { color: var(--brass); }
+
 /* Buttons */
 .panel-buttons { padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
 
@@ -350,6 +392,20 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
     <!-- Connection 1 (Bottom) -->
     <div class="panel-section">
       <div class="panel-section-title">Connection 1 — Bottom Opening</div>
+      <button class="help-toggle" onclick="toggleHelp('help-conn1')" id="btn-help-conn1">
+        <span class="toggle-icon">▶</span> How to measure this opening
+      </button>
+      <div class="help-panel" id="help-conn1">
+        <h4>What is Connection 1?</h4>
+        Connection 1 is the <strong>bottom opening</strong> — typically the furnace collar or the existing duct opening you are connecting from. Stand in front of the unit facing it straight on.
+        <h4>Width (left to right)</h4>
+        Measure the opening from the <strong>left edge to the right edge</strong> as you face it. This is always your horizontal measurement.
+        <h4>Depth (front to back)</h4>
+        Measure from the <strong>front edge to the back edge</strong> going away from you. This is always your front-to-back measurement.
+        <div class="help-example">
+          <strong>Example:</strong> A 20×18 furnace collar — 20" is left-to-right (width), 18" is front-to-back (depth).
+        </div>
+      </div>
       <div class="field-group">
         <label>Dimensions</label>
         <div class="dim-grid">
@@ -377,6 +433,24 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
     <!-- Connection 2 (Top) -->
     <div class="panel-section">
       <div class="panel-section-title">Connection 2 — Top Opening</div>
+      <button class="help-toggle" onclick="toggleHelp('help-conn2')" id="btn-help-conn2">
+        <span class="toggle-icon">▶</span> Connection types explained
+      </button>
+      <div class="help-panel" id="help-conn2">
+        <h4>What is Connection 2?</h4>
+        Connection 2 is the <strong>top opening</strong> — typically the existing duct you are connecting into. Measure it the same way as Connection 1: width left-to-right, depth front-to-back.
+        <h4>Connection Types</h4>
+        <ul>
+          <li><strong>Plenum Bend</strong> — a folded flange bent outward, sits over the furnace collar. Most common on the bottom connection.</li>
+          <li><strong>1" Outside Flange</strong> — flange folds outward 1". Used when the transition needs to sit outside the existing duct opening.</li>
+          <li><strong>1" Inside Flange</strong> — flange folds inward 1". Slides inside the existing duct opening.</li>
+          <li><strong>S-Lock</strong> — a formed channel that accepts a drive cleat. Standard duct-to-duct connection. Most common on the top connection.</li>
+          <li><strong>Capped</strong> — solid top, no opening. Used when the transition is a dead-end plenum or you are capping off a run.</li>
+        </ul>
+        <div class="help-example">
+          <strong>Not sure?</strong> Plenum Bend on bottom and S-Lock on top is the most common residential configuration.
+        </div>
+      </div>
       <div class="field-group">
         <label>Dimensions</label>
         <div class="dim-grid">
@@ -411,10 +485,27 @@ description: "Mobile-friendly transition request form for field techs. Enter dim
         <span class="field-hint">Vertical distance between connections</span>
       </div>
 
-      <div class="gap-info">
-        <strong>How to measure edge gaps:</strong><br>
-        <strong>Positive (+):</strong> Top duct extends beyond bottom opening<br>
-        <strong>Negative (−):</strong> Bottom opening extends beyond top duct
+      <button class="help-toggle" onclick="toggleHelp('help-gaps')" id="btn-help-gaps">
+        <span class="toggle-icon">▶</span> What are edge gaps?
+      </button>
+      <div class="help-panel" id="help-gaps">
+        <h4>Edge Gaps — The Short Version</h4>
+        Edge gaps describe how the <strong>top duct is offset from the bottom opening</strong>. If both openings are the same size and perfectly centered, all gaps are 0. If the duct is bigger, smaller, or shifted, you need to tell us by how much and in which direction.
+        <h4>How to Measure</h4>
+        Stand facing the unit. Look at the left edge of the bottom opening and the left edge of the top duct directly above it.
+        <ul>
+          <li><strong>Positive number (+)</strong> — the top duct extends <em>beyond</em> the bottom opening on that side. Example: top duct hangs 2" to the left of the furnace → Left gap = +2</li>
+          <li><strong>Negative number (−)</strong> — the bottom opening extends <em>beyond</em> the top duct on that side. Example: furnace sticks out 2" past the duct on the right → Right gap = −2</li>
+          <li><strong>Zero (0)</strong> — edges are flush on that side.</li>
+        </ul>
+        <h4>The Auto-Calculate</h4>
+        Once you enter one side, the opposite side calculates automatically based on the size difference between the two openings. You can override it if your field measurement doesn't match.
+        <div class="help-example">
+          <strong>Example:</strong> 20" wide furnace, 18" wide duct centered on it — the duct is 2" narrower total, so 1" per side. Left gap = −1, Right gap = −1 (furnace sticks out 1" on each side).
+        </div>
+        <div class="help-example" style="margin-top:8px;">
+          <strong>Still not sure?</strong> Leave all gaps at 0 and add a note in the Notes field describing the offset in plain language. We will call you to confirm before cutting.
+        </div>
       </div>
 
       <div class="field-group">
@@ -945,6 +1036,14 @@ function resetForm() {
     '<div class="summary-row"><span class="s-label">Status</span><span class="s-value" style="color:var(--text-muted);">Enter dimensions to populate</span></div>';
   document.getElementById('confirmation').style.display = 'none';
   drawPlaceholder();
+}
+
+// ─── HELP TOGGLE ─────────────────────────────────────────────
+function toggleHelp(id) {
+  const panel = document.getElementById(id);
+  const btn   = document.getElementById('btn-' + id);
+  panel.classList.toggle('visible');
+  btn.classList.toggle('open');
 }
 
 window.onload = function() { resizeCanvas(); };
