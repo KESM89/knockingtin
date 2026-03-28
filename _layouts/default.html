@@ -66,6 +66,13 @@
   </div>
   <div class="footer-copy">© {{ 'now' | date: "%Y" }} Knocking Tin. Written and built by a working fabricator.</div>
 </footer>
-
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const nav = document.querySelector('nav');
+  hamburger.addEventListener('click', function() {
+    nav.classList.toggle('nav-open');
+    hamburger.classList.toggle('is-open');
+  });
+</script>
 </body>
 </html>
