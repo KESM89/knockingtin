@@ -3,7 +3,7 @@ layout: post
 title: "Why the Pittsburgh Seam Is Still King — And When It Isn't"
 description: "After years of running a shop, I've rolled a lot of Pittsburgh seams. Here's when it's the right call, when it's overkill, and what the alternatives actually look like in the real world."
 category: Fabrication Fundamentals
-date: 2025-03-12
+date: 2026-03-12
 read_time: 8
 featured: true
 tags: [seams, fabrication, pittsburgh, shop standards]
