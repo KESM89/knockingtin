@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-
+ 
 <!-- ═══ HERO ══════════════════════════════════════════════════ -->
 <section class="hero">
   <div class="hero-inner">
@@ -18,11 +18,18 @@ layout: default
         <a href="/tools/" class="btn-ghost">Browse Calculators →</a>
       </div>
     </div>
-
-  
+ 
+    <div class="hero-subscribe">
+      <h3>The Shop Floor Dispatch</h3>
+      <p>New articles, fabrication deep-dives, and field-tested knowledge — delivered when there's actually something worth saying. No spam, ever.</p>
+      <div class="kit-override">
+        <script async data-uid="22a6c26ce3" src="https://knocking-tin.kit.com/22a6c26ce3/index.js"></script>
+      </div>
+      <p class="subscribe-note">Fabricators only. Unsubscribe any time.</p>
+    </div>
   </div>
 </section>
-
+ 
 <!-- ═══ FEATURED POSTS ════════════════════════════════════════ -->
 <section id="blog">
   <div class="section-inner">
@@ -33,10 +40,10 @@ layout: default
       </div>
       <a href="/blog/" class="see-all">All Articles →</a>
     </div>
-
+ 
     {% assign featured = site.posts | where: "featured", true | first %}
     {% assign side_posts = site.posts | where: "featured", false | limit: 2 %}
-
+ 
     <div class="featured-grid">
       {% if featured %}
       <div class="featured-main">
@@ -52,7 +59,7 @@ layout: default
         <a href="{{ featured.url }}" class="read-link">Read Article →</a>
       </div>
       {% endif %}
-
+ 
       <div class="featured-side">
         {% for post in side_posts %}
         <a href="{{ post.url }}" class="side-post">
@@ -69,7 +76,7 @@ layout: default
     </div>
   </div>
 </section>
-
+ 
 <!-- ═══ TOOLS ═════════════════════════════════════════════════ -->
 <section class="tools-section" id="tools">
   <div class="section-inner">
@@ -80,7 +87,7 @@ layout: default
       </div>
       <a href="/tools/" class="see-all">All Tools →</a>
     </div>
-
+ 
     <div class="tools-grid">
       <a href="/tools/cleat-calculator/" class="tool-card">
         <div class="tool-icon">
@@ -90,7 +97,7 @@ layout: default
         <p>Enter duct dimensions and get a complete cut list — cleats, drives, and quantities — ready for the shop floor.</p>
         <span class="tool-tag">PDF Output</span>
       </a>
-
+ 
       <a href="/tools/duct-sizing/" class="tool-card">
         <div class="tool-icon">
           <svg viewBox="0 0 24 24"><polygon points="3,21 10,3 21,21"/><line x1="6" y1="15" x2="18" y2="15"/></svg>
@@ -99,7 +106,7 @@ layout: default
         <p>Size rectangular and round ductwork using the equal friction method — 0.1" WG per 100 ft — with ASHRAE/SMACNA verified data.</p>
         <span class="tool-tag">ASHRAE / SMACNA</span>
       </a>
-
+ 
       <a href="/tools/transition-request/" class="tool-card">
         <div class="tool-icon">
           <svg viewBox="0 0 24 24"><path d="M3 3 L21 3 L21 15 L3 15 Z"/><path d="M8 15 L6 21 L18 21 L16 15"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
@@ -108,7 +115,7 @@ layout: default
         <p>Mobile-friendly order form for field techs. Enter dimensions and get a real-time 2D drawing and live quote before you call.</p>
         <span class="tool-tag">Mobile Friendly</span>
       </a>
-
+ 
       <a href="#" class="tool-card">
         <div class="tool-icon">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3 L12 12 L17 17"/></svg>
@@ -117,7 +124,7 @@ layout: default
         <p>Calculate cheek panel dimensions, throat and heel radii, and flat pattern layout for radius elbows.</p>
         <span class="tool-tag">Coming Soon</span>
       </a>
-
+ 
       <a href="#" class="tool-card">
         <div class="tool-icon">
           <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="12" y2="15"/></svg>
@@ -126,7 +133,7 @@ layout: default
         <p>Look up furnace plenum dimensions by manufacturer and model. Carrier, Trane, Lennox, Goodman, Rheem — all in one place.</p>
         <span class="tool-tag">Coming Soon</span>
       </a>
-
+ 
       <a href="{{ site.author.shop_url }}" class="tool-card" target="_blank">
         <div class="tool-icon">
           <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
@@ -138,7 +145,7 @@ layout: default
     </div>
   </div>
 </section>
-
+ 
 <!-- ═══ RECENT POSTS ══════════════════════════════════════════ -->
 <section>
   <div class="section-inner">
@@ -149,7 +156,7 @@ layout: default
       </div>
       <a href="/blog/" class="see-all">All Articles →</a>
     </div>
-
+ 
     <div class="posts-list">
       {% assign recent_posts = site.posts | limit: 5 %}
       {% for post in recent_posts %}
