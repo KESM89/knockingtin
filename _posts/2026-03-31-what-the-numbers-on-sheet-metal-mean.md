@@ -3,7 +3,7 @@ layout: post
 title: "What the Numbers on Your Sheet Metal Mean — And Why We Use G90"
 description: "Gauge, G90, coating weight, coil stock — the sheet metal language most guys hear on jobs without anyone ever really explaining what it means."
 category: Materials & Standards
-date: 2026-03-28
+date: 2026-03-31
 read_time: 7
 featured: false
 tags: [galvanized steel, materials, G90, gauge, sheet metal specs]
