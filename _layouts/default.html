@@ -9,7 +9,7 @@
   {% seo %}
 </head>
 <body>
-
+ 
 <header>
   <div class="nav-inner">
     <a href="{{ '/' | relative_url }}" class="wordmark">
@@ -43,23 +43,23 @@
     </button>
   </div>
 </header>
-
+ 
 {{ content }}
-
+ 
 <div class="newsletter-band" id="subscribe">
   <div class="newsletter-inner">
-  <div class="section-label">Stay In The Loop</div>
-<h2>Knowledge From<br>The Shop Floor</h2>
-<p>
-  Join fabricators and field techs who want real knowledge — not content marketing
-  dressed up as expertise. When there's something worth saying, it lands in your inbox.
-</p>
-<div class="kit-override">
-  <script async data-uid="22a6c26ce3" src="https://knocking-tin.kit.com/22a6c26ce3/index.js"></script>
-</div>
+    <div class="section-label">Stay In The Loop</div>
+    <h2>Knowledge From<br>The Shop Floor</h2>
+    <p>
+      Join fabricators and field techs who want real knowledge — not content marketing
+      dressed up as expertise. When there's something worth saying, it lands in your inbox.
+    </p>
+    <div class="kit-override">
+      <script async data-uid="22a6c26ce3" src="https://knocking-tin.kit.com/22a6c26ce3/index.js"></script>
+    </div>
   </div>
 </div>
-
+ 
 <footer>
   <div class="footer-inner">
     <div class="footer-left">
@@ -69,12 +69,15 @@
     <div class="footer-links">
       <a href="{{ '/blog/' | relative_url }}">Blog</a>
       <a href="{{ '/tools/' | relative_url }}">Tools</a>
+      <a href="{{ '/glossary/' | relative_url }}">Glossary</a>
+      <a href="{{ '/reading-list/' | relative_url }}">Reading List</a>
       <a href="{{ '/about/' | relative_url }}">About</a>
       <a href="{{ site.author.shop_url }}" target="_blank">K&amp;E Sheet Metal</a>
     </div>
   </div>
   <div class="footer-copy">© {{ 'now' | date: "%Y" }} Knocking Tin. Written and built by a working fabricator.</div>
 </footer>
+ 
 <script>
   const hamburger = document.querySelector('.hamburger');
   const nav = document.querySelector('nav');
@@ -83,8 +86,8 @@
     hamburger.classList.toggle('is-open');
   });
 </script>
-  <script>
-  // Toggle dropdown on click (handles touch screens and keyboard nav)
+ 
+<script>
   document.querySelectorAll('.nav-dropdown__trigger').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -93,12 +96,12 @@
     });
   });
  
-  // Close dropdown when clicking outside
   document.addEventListener('click', function() {
     document.querySelectorAll('.nav-dropdown__trigger').forEach(function(btn) {
       btn.setAttribute('aria-expanded', 'false');
     });
   });
 </script>
+ 
 </body>
 </html>
