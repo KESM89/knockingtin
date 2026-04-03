@@ -83,5 +83,22 @@
     hamburger.classList.toggle('is-open');
   });
 </script>
+  <script>
+  // Toggle dropdown on click (handles touch screens and keyboard nav)
+  document.querySelectorAll('.nav-dropdown__trigger').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !expanded);
+    });
+  });
+ 
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.nav-dropdown__trigger').forEach(function(btn) {
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
 </body>
 </html>
