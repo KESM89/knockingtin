@@ -20,15 +20,24 @@
       </svg>
       KNOCKING <span>TIN</span>
     </a>
-
     <nav>
       <a href="{{ '/blog/' | relative_url }}">Blog</a>
       <a href="{{ '/tools/' | relative_url }}">Tools</a>
+ 
+      <div class="nav-dropdown">
+        <button class="nav-dropdown__trigger" aria-expanded="false" aria-haspopup="true">
+          Reference <span class="nav-dropdown__caret">&#9662;</span>
+        </button>
+        <div class="nav-dropdown__menu" role="menu">
+          <a href="{{ '/glossary/' | relative_url }}" role="menuitem">Glossary</a>
+          <a href="{{ '/reading-list/' | relative_url }}" role="menuitem">Reading List</a>
+        </div>
+      </div>
+ 
       <a href="{{ '/about/' | relative_url }}">About</a>
       <a href="{{ site.author.shop_url }}" target="_blank">Shop</a>
       <a href="#subscribe" class="nav-cta">Subscribe</a>
     </nav>
-
     <button class="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
