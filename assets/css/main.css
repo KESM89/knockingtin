@@ -95,6 +95,11 @@ nav a:hover { color: var(--text); background: var(--surface); }
     border: none;
     cursor: pointer;
     font: inherit;
+    font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
     color: inherit;
     padding: 0;
     letter-spacing: inherit;
