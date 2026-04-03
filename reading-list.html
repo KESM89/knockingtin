@@ -5,471 +5,454 @@ description: Books and technical references worth owning if you work in HVAC she
 permalink: /reading-list/
 ---
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Libre+Baskerville:ital@0;1&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
-  /* ── Page-level overrides & variables ── */
-  :root {
-    --brass:       #b8922a;
-    --brass-light: #d4a93a;
-    --brass-dim:   #8a6c1e;
-    --charcoal:    #1e1e1e;
-    --surface:     #252525;
-    --surface-2:   #2d2d2d;
-    --border:      #383838;
-    --text:        #d4cfc8;
-    --text-muted:  #7a7570;
-    --text-faint:  #4a4540;
-    --radius:      4px;
-  }
+/* ── Reading List scoped variables ── */
+.rl-wrap {
+  --rl-brass:       #b8922a;
+  --rl-brass-light: #d4a93a;
+  --rl-brass-dim:   #8a6c1e;
+  --rl-charcoal:    #1e1e1e;
+  --rl-surface:     #1c1e21;
+  --rl-surface-2:   #232629;
+  --rl-border:      #2e3135;
+  --rl-text:        #ede8df;
+  --rl-text-muted:  #7d7870;
+  --rl-text-faint:  #4a4540;
+  --rl-radius:      4px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
 
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Libre+Baskerville:ital@0;1&family=Rajdhani:wght@400;600&display=swap');
+.rl-hero {
+  padding: 0 0 2.5rem;
+  border-bottom: 1px solid var(--rl-border);
+  margin-bottom: 3rem;
+}
 
-  .rl-hero {
-    padding: 4rem 0 2.5rem;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 3rem;
-  }
+.rl-hero__eyebrow {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rl-brass);
+  margin-bottom: 0.75rem;
+}
 
-  .rl-hero__eyebrow {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--brass);
-    margin-bottom: 0.75rem;
-  }
+.rl-hero__title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--rl-text);
+  line-height: 1.15;
+  margin: 0 0 1.25rem;
+}
 
-  .rl-hero__title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    color: var(--text);
-    line-height: 1.15;
-    margin: 0 0 1.25rem;
-  }
+.rl-hero__lead {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--rl-text-muted);
+  max-width: 640px;
+}
 
-  .rl-hero__lead {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--text-muted);
-    max-width: 640px;
-  }
+.rl-hero__lead em {
+  color: var(--rl-text);
+  font-style: italic;
+}
 
-  .rl-hero__lead em {
-    color: var(--text);
-    font-style: italic;
-  }
+/* ── Disclosure ── */
+.rl-disclosure {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--rl-surface);
+  border: 1px solid var(--rl-border);
+  border-left: 3px solid var(--rl-brass-dim);
+  border-radius: var(--rl-radius);
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 3rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--rl-text-muted);
+  line-height: 1.6;
+}
 
-  /* ── Disclosure ── */
-  .rl-disclosure {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--brass-dim);
-    border-radius: var(--radius);
-    padding: 0.9rem 1.1rem;
-    margin-bottom: 3rem;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.82rem;
-    letter-spacing: 0.04em;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
+.rl-disclosure__icon {
+  flex-shrink: 0;
+  color: var(--rl-brass-dim);
+  margin-top: 1px;
+  font-size: 0.9rem;
+}
 
-  .rl-disclosure__icon {
-    flex-shrink: 0;
-    color: var(--brass-dim);
-    margin-top: 1px;
-    font-size: 0.9rem;
-  }
+/* ── Section headers ── */
+.rl-section {
+  margin-bottom: 4rem;
+}
 
-  /* ── Section headers ── */
-  .rl-section {
-    margin-bottom: 4rem;
-  }
+.rl-section__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rl-border);
+}
 
-  .rl-section__header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.75rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border);
-  }
+.rl-section__label {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rl-brass);
+}
 
-  .rl-section__label {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    font-size: 0.7rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--brass);
-  }
+.rl-section__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--rl-text);
+  margin: 0;
+}
 
-  .rl-section__title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: var(--text);
-    margin: 0;
-  }
+/* ── Book cards ── */
+.rl-books {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
 
-  /* ── Book cards ── */
-  .rl-books {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
+@media (min-width: 700px) {
+  .rl-books { grid-template-columns: 1fr 1fr; }
+}
 
-  @media (min-width: 700px) {
-    .rl-books {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
+.rl-book {
+  background: var(--rl-surface);
+  border: 1px solid var(--rl-border);
+  border-radius: var(--rl-radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
 
-  .rl-book {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-    position: relative;
-    overflow: hidden;
-  }
+.rl-book::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--rl-brass-dim);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
 
-  .rl-book::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px;
-    height: 100%;
-    background: var(--brass-dim);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
+.rl-book:hover {
+  border-color: var(--rl-brass-dim);
+  transform: translateY(-2px);
+}
 
-  .rl-book:hover {
-    border-color: var(--brass-dim);
-    transform: translateY(-2px);
-  }
+.rl-book:hover::before { opacity: 1; }
 
-  .rl-book:hover::before {
-    opacity: 1;
-  }
+.rl-book--featured {
+  border-color: var(--rl-brass-dim);
+  background: var(--rl-surface-2);
+  grid-column: 1 / -1;
+}
 
-  .rl-book--featured {
-    border-color: var(--brass-dim);
-    background: var(--surface-2);
-    grid-column: 1 / -1;
-  }
+.rl-book--featured::before {
+  opacity: 1;
+  background: var(--rl-brass);
+}
 
-  .rl-book--featured::before {
-    opacity: 1;
-    background: var(--brass);
-  }
+.rl-book__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rl-brass);
+  background: rgba(184, 146, 42, 0.1);
+  border: 1px solid rgba(184, 146, 42, 0.25);
+  border-radius: 2px;
+  padding: 0.2rem 0.5rem;
+  margin-bottom: 0.85rem;
+  width: fit-content;
+}
 
-  .rl-book__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--brass);
-    background: rgba(184, 146, 42, 0.1);
-    border: 1px solid rgba(184, 146, 42, 0.25);
-    border-radius: 2px;
-    padding: 0.2rem 0.5rem;
-    margin-bottom: 0.85rem;
-    width: fit-content;
-  }
+.rl-book__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--rl-text);
+  line-height: 1.3;
+  margin: 0 0 0.3rem;
+}
 
-  .rl-book__title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.3;
-    margin: 0 0 0.3rem;
-  }
+.rl-book__author {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--rl-text-faint);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
 
-  .rl-book__author {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    color: var(--text-faint);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-  }
+.rl-book__desc {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: var(--rl-text-muted);
+  flex-grow: 1;
+  margin-bottom: 1.25rem;
+}
 
-  .rl-book__desc {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 0.88rem;
-    line-height: 1.75;
-    color: var(--text-muted);
-    flex-grow: 1;
-    margin-bottom: 1.25rem;
-  }
+.rl-book__desc strong {
+  color: var(--rl-text);
+  font-weight: normal;
+  font-style: italic;
+}
 
-  .rl-book__desc strong {
-    color: var(--text);
-    font-weight: normal;
-    font-style: italic;
-  }
+.rl-book__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rl-brass);
+  text-decoration: none;
+  border: 1px solid var(--rl-brass-dim);
+  border-radius: var(--rl-radius);
+  padding: 0.5rem 0.9rem;
+  width: fit-content;
+  transition: background 0.2s ease, color 0.2s ease;
+}
 
-  .rl-book__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--brass);
-    text-decoration: none;
-    border: 1px solid var(--brass-dim);
-    border-radius: var(--radius);
-    padding: 0.5rem 0.9rem;
-    width: fit-content;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
+.rl-book__cta:hover {
+  background: var(--rl-brass);
+  color: #1e1e1e;
+  text-decoration: none;
+}
 
-  .rl-book__cta:hover {
-    background: var(--brass);
-    color: var(--charcoal);
-    text-decoration: none;
-  }
+.rl-book__cta svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+}
 
-  .rl-book__cta svg {
-    width: 13px;
-    height: 13px;
-    fill: currentColor;
-  }
+/* ── Closing note ── */
+.rl-note {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rl-border);
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--rl-text-muted);
+}
 
-  /* ── Closing note ── */
-  .rl-note {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-    font-family: 'Libre Baskerville', serif;
-    font-size: 0.9rem;
-    line-height: 1.8;
-    color: var(--text-muted);
-  }
-
-  .rl-note em {
-    color: var(--text);
-    font-style: italic;
-  }
+.rl-note em {
+  color: var(--rl-text);
+  font-style: italic;
+}
 </style>
 
-<div class="rl-hero">
-  <p class="rl-hero__eyebrow">&#9656; Reference Shelf</p>
-  <h1 class="rl-hero__title">Books Worth Owning</h1>
-  <p class="rl-hero__lead">
-    This isn't a comprehensive bibliography. It's a short list of references I've actually used —
-    on the bench, in the shop, or while figuring something out at ten o'clock at night.
-    <em>Buy the SMACNA manual before you buy anything else.</em>
-  </p>
-</div>
+<div class="rl-wrap">
 
-<div class="rl-disclosure">
-  <span class="rl-disclosure__icon">&#9432;</span>
-  <span>
-    <strong>Affiliate disclosure:</strong> Links on this page go to Amazon and include my affiliate tag.
-    If you buy through them, I earn a small commission at no extra cost to you.
-    I only list books I'd actually recommend to someone new to the trade — or someone who's been in it for years.
-  </span>
-</div>
-
-<!-- ══════════════════════════════════
-     SECTION 1: Standards & Codes
-════════════════════════════════════ -->
-<section class="rl-section">
-  <div class="rl-section__header">
-    <span class="rl-section__label">01</span>
-    <h2 class="rl-section__title">Standards &amp; Technical References</h2>
+  <div class="rl-hero">
+    <p class="rl-hero__eyebrow">&#9656; Reference Shelf</p>
+    <h1 class="rl-hero__title">Books Worth Owning</h1>
+    <p class="rl-hero__lead">
+      This isn't a comprehensive bibliography. It's a short list of references I've actually used —
+      on the bench, in the shop, or while figuring something out at ten o'clock at night.
+      <em>Buy the SMACNA manual before you buy anything else.</em>
+    </p>
   </div>
 
-  <div class="rl-books">
-
-    <!-- SMACNA – Featured -->
-    <div class="rl-book rl-book--featured">
-      <span class="rl-book__badge">&#9733; Start Here</span>
-      <h3 class="rl-book__title">SMACNA HVAC Duct Construction Standards — Metal and Flexible, 4th Edition</h3>
-      <p class="rl-book__author">Sheet Metal and Air Conditioning Contractors' National Association</p>
-      <p class="rl-book__desc">
-        If there's one book that lives on the bench, this is it. Construction gauges, reinforcement schedules,
-        seam and joint classifications, hanger spacing — it's all in here, organized the way you'd actually
-        look for it. <strong>Engineers spec to it, inspectors reference it, and fabricators get held to it.</strong>
-        Don't let someone else in the room be the one who has a copy.
-      </p>
-      <a class="rl-book__cta" href="https://www.amazon.com/s?k=SMACNA+HVAC+Duct+Construction+Standards+4th+Edition&tag=kraymo-20" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
-        View on Amazon
-      </a>
-    </div>
-
-    <!-- ASHRAE Fundamentals -->
-    <div class="rl-book">
-      <h3 class="rl-book__title">ASHRAE Handbook — Fundamentals</h3>
-      <p class="rl-book__author">ASHRAE</p>
-      <p class="rl-book__desc">
-        Dense and expensive, but the psychrometrics chapter alone is worth the price of admission if
-        you're doing load calculations or troubleshooting moisture problems. Updated every four years.
-        <strong>The Fundamentals volume is the one most applicable to fabrication and design work</strong> —
-        the others (HVAC Systems, Refrigeration, Applications) are more for the mechanical engineer side.
-      </p>
-      <a class="rl-book__cta" href="https://www.amazon.com/s?k=ASHRAE+Handbook+Fundamentals&tag=kraymo-20" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
-        View on Amazon
-      </a>
-    </div>
-
-    <!-- SMACNA Architectural -->
-    <div class="rl-book">
-      <h3 class="rl-book__title">SMACNA Architectural Sheet Metal Manual, 7th Edition</h3>
-      <p class="rl-book__author">Sheet Metal and Air Conditioning Contractors' National Association</p>
-      <p class="rl-book__desc">
-        The companion to the duct standards for anyone doing flashings, copings, gutters, or ornamental work.
-        It's a different world than HVAC fabrication, but <strong>if your shop handles architectural work at all,
-        this is the reference that settles arguments</strong> — especially around drainage slopes and expansion
-        joint spacing.
-      </p>
-      <a class="rl-book__cta" href="https://www.amazon.com/s?k=SMACNA+Architectural+Sheet+Metal+Manual+7th+Edition&tag=kraymo-20" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
-        View on Amazon
-      </a>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════
-     SECTION 2: Fabrication & Layout
-════════════════════════════════════ -->
-<section class="rl-section">
-  <div class="rl-section__header">
-    <span class="rl-section__label">02</span>
-    <h2 class="rl-section__title">Fabrication &amp; Pattern Layout</h2>
+  <div class="rl-disclosure">
+    <span class="rl-disclosure__icon">&#9432;</span>
+    <span>
+      <strong>Affiliate disclosure:</strong> Links on this page go to Amazon and include my affiliate tag.
+      If you buy through them, I earn a small commission at no extra cost to you.
+      I only list books I'd actually recommend to someone new to the trade — or someone who's been in it for years.
+    </span>
   </div>
 
-  <div class="rl-books">
-
-    <!-- Sheet Metal Pattern Layouts – Anderson -->
-    <div class="rl-book">
-      <h3 class="rl-book__title">Sheet Metal Pattern Layouts</h3>
-      <p class="rl-book__author">Edwin P. Anderson</p>
-      <p class="rl-book__desc">
-        Old book. Out of print. Worth hunting down a used copy anyway.
-        Anderson walked through parallel line, radial line, and triangulation development
-        the way an instructor should — showing the geometry, not just the procedure.
-        <strong>This is the book that explains <em>why</em> the layout works,</strong> which
-        matters more than any shortcut table once you're trying to figure out something
-        you've never made before.
-      </p>
-      <a class="rl-book__cta" href="https://www.amazon.com/s?k=Sheet+Metal+Pattern+Layouts+Anderson&tag=kraymo-20" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
-        Search on Amazon
-      </a>
+  <!-- SECTION 1: Standards & Codes -->
+  <section class="rl-section">
+    <div class="rl-section__header">
+      <span class="rl-section__label">01</span>
+      <h2 class="rl-section__title">Standards &amp; Technical References</h2>
     </div>
+    <div class="rl-books">
 
-    <!-- Audel HVAC Fundamentals -->
-    <div class="rl-book">
-      <h3 class="rl-book__title">Audel HVAC Fundamentals (3-Volume Set)</h3>
-      <p class="rl-book__author">James E. Brumbaugh</p>
-      <p class="rl-book__desc">
-        A workhorse reference set that covers air distribution, heating systems, and cooling equipment
-        in plain language. Not glamorous. <strong>The kind of book you buy for a helper who's sharp
-        and wants to understand the system, not just the task.</strong>
-        Volume 1 on air distribution is the most directly useful for sheet metal work.
-      </p>
-      <a class="rl-book__cta" href="https://www.amazon.com/s?k=Audel+HVAC+Fundamentals+Brumbaugh&tag=kraymo-20" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
-        View on Amazon
-      </a>
+      <div class="rl-book rl-book--featured">
+        <span class="rl-book__badge">&#9733; Start Here</span>
+        <h3 class="rl-book__title">SMACNA HVAC Duct Construction Standards — Metal and Flexible, 4th Edition</h3>
+        <p class="rl-book__author">Sheet Metal and Air Conditioning Contractors' National Association</p>
+        <p class="rl-book__desc">
+          If there's one book that lives on the bench, this is it. Construction gauges, reinforcement schedules,
+          seam and joint classifications, hanger spacing — it's all in here, organized the way you'd actually
+          look for it. <strong>Engineers spec to it, inspectors reference it, and fabricators get held to it.</strong>
+          Don't let someone else in the room be the one who has a copy.
+        </p>
+        <a class="rl-book__cta" href="https://www.amazon.com/s?k=SMACNA+HVAC+Duct+Construction+Standards+4th+Edition&tag=kraymo-20" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
+          View on Amazon
+        </a>
+      </div>
+
+      <div class="rl-book">
+        <h3 class="rl-book__title">ASHRAE Handbook — Fundamentals</h3>
+        <p class="rl-book__author">ASHRAE</p>
+        <p class="rl-book__desc">
+          Dense and expensive, but the psychrometrics chapter alone is worth the price of admission if
+          you're doing load calculations or troubleshooting moisture problems. Updated every four years.
+          <strong>The Fundamentals volume is the one most applicable to fabrication and design work</strong> —
+          the others (HVAC Systems, Refrigeration, Applications) are more for the mechanical engineer side.
+        </p>
+        <a class="rl-book__cta" href="https://www.amazon.com/s?k=ASHRAE+Handbook+Fundamentals&tag=kraymo-20" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
+          View on Amazon
+        </a>
+      </div>
+
+      <div class="rl-book">
+        <h3 class="rl-book__title">SMACNA Architectural Sheet Metal Manual, 7th Edition</h3>
+        <p class="rl-book__author">Sheet Metal and Air Conditioning Contractors' National Association</p>
+        <p class="rl-book__desc">
+          The companion to the duct standards for anyone doing flashings, copings, gutters, or ornamental work.
+          It's a different world than HVAC fabrication, but <strong>if your shop handles architectural work at all,
+          this is the reference that settles arguments</strong> — especially around drainage slopes and expansion
+          joint spacing.
+        </p>
+        <a class="rl-book__cta" href="https://www.amazon.com/s?k=SMACNA+Architectural+Sheet+Metal+Manual+7th+Edition&tag=kraymo-20" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
+          View on Amazon
+        </a>
+      </div>
+
     </div>
+  </section>
 
-    <!-- ITI Sheet Metal -->
-    <div class="rl-book">
-      <h3 class="rl-book__title">Sheet Metal (Drafting Technology)</h3>
-      <p class="rl-book__author">Leo J. Santi</p>
-      <p class="rl-book__desc">
-        Another trade-school era text that covers geometry development from first principles.
-        Seam allowances, Pittsburgh lock dimensions, drive cleat profiles —
-        <strong>written for someone who was going to go stand at a brake and make something,</strong>
-        not just read about it. Availability varies; check used listings.
-      </p>
-      <a class="rl-book__cta" href="https://www.amazon.com/s?k=Sheet+Metal+Santi+drafting+technology&tag=kraymo-20" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
-        Search on Amazon
-      </a>
+  <!-- SECTION 2: Fabrication & Layout -->
+  <section class="rl-section">
+    <div class="rl-section__header">
+      <span class="rl-section__label">02</span>
+      <h2 class="rl-section__title">Fabrication &amp; Pattern Layout</h2>
     </div>
+    <div class="rl-books">
 
+      <div class="rl-book">
+        <h3 class="rl-book__title">Sheet Metal Pattern Layouts</h3>
+        <p class="rl-book__author">Edwin P. Anderson</p>
+        <p class="rl-book__desc">
+          Old book. Out of print. Worth hunting down a used copy anyway.
+          Anderson walked through parallel line, radial line, and triangulation development
+          the way an instructor should — showing the geometry, not just the procedure.
+          <strong>This is the book that explains <em>why</em> the layout works,</strong> which
+          matters more than any shortcut table once you're trying to figure out something
+          you've never made before.
+        </p>
+        <a class="rl-book__cta" href="https://www.amazon.com/s?k=Sheet+Metal+Pattern+Layouts+Anderson&tag=kraymo-20" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
+          Search on Amazon
+        </a>
+      </div>
+
+      <div class="rl-book">
+        <h3 class="rl-book__title">Audel HVAC Fundamentals (3-Volume Set)</h3>
+        <p class="rl-book__author">James E. Brumbaugh</p>
+        <p class="rl-book__desc">
+          A workhorse reference set that covers air distribution, heating systems, and cooling equipment
+          in plain language. Not glamorous. <strong>The kind of book you buy for a helper who's sharp
+          and wants to understand the system, not just the task.</strong>
+          Volume 1 on air distribution is the most directly useful for sheet metal work.
+        </p>
+        <a class="rl-book__cta" href="https://www.amazon.com/s?k=Audel+HVAC+Fundamentals+Brumbaugh&tag=kraymo-20" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
+          View on Amazon
+        </a>
+      </div>
+
+      <div class="rl-book">
+        <h3 class="rl-book__title">Sheet Metal (Drafting Technology)</h3>
+        <p class="rl-book__author">Leo J. Santi</p>
+        <p class="rl-book__desc">
+          Another trade-school era text that covers geometry development from first principles.
+          Seam allowances, Pittsburgh lock dimensions, drive cleat profiles —
+          <strong>written for someone who was going to go stand at a brake and make something,</strong>
+          not just read about it. Availability varies; check used listings.
+        </p>
+        <a class="rl-book__cta" href="https://www.amazon.com/s?k=Sheet+Metal+Santi+drafting+technology&tag=kraymo-20" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
+          Search on Amazon
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3: Business & Trade -->
+  <section class="rl-section">
+    <div class="rl-section__header">
+      <span class="rl-section__label">03</span>
+      <h2 class="rl-section__title">Running the Business</h2>
+    </div>
+    <div class="rl-books">
+
+      <div class="rl-book">
+        <h3 class="rl-book__title">Markup &amp; Profit: A Contractor's Guide, Revisited</h3>
+        <p class="rl-book__author">Michael Stone</p>
+        <p class="rl-book__desc">
+          Contractors charge too little. This book makes the case for why, and walks through
+          how to actually calculate a markup that keeps the lights on after labor, material, overhead,
+          and a reasonable profit margin. <strong>Not HVAC-specific, but the math is universal
+          and most people in the trades are undercharging</strong> in ways this book makes obvious.
+        </p>
+        <a class="rl-book__cta" href="https://www.amazon.com/s?k=Markup+Profit+Contractor+Guide+Michael+Stone&tag=kraymo-20" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
+          View on Amazon
+        </a>
+      </div>
+
+      <div class="rl-book">
+        <h3 class="rl-book__title">The E-Myth Contractor</h3>
+        <p class="rl-book__author">Michael E. Gerber</p>
+        <p class="rl-book__desc">
+          The original <em>E-Myth</em> is a classic, but the contractor-specific version cuts to the point
+          faster. The core argument — that being good at the trade doesn't automatically make you good at
+          running a trade business — is one most shop owners figure out the hard way.
+          <strong>Better to read it before you hire your first employee.</strong>
+        </p>
+        <a class="rl-book__cta" href="https://www.amazon.com/s?k=E-Myth+Contractor+Gerber&tag=kraymo-20" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
+          View on Amazon
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="rl-note">
+    <p>
+      If you have a book that should be on this list — something you actually use, not just something
+      that looked good on a shelf — <em>I'd like to hear about it.</em> The best recommendations in
+      this trade still travel by word of mouth.
+    </p>
   </div>
-</section>
 
-
-<!-- ══════════════════════════════════
-     SECTION 3: Business & Trade
-════════════════════════════════════ -->
-<section class="rl-section">
-  <div class="rl-section__header">
-    <span class="rl-section__label">03</span>
-    <h2 class="rl-section__title">Running the Business</h2>
-  </div>
-
-  <div class="rl-books">
-
-    <!-- Markup & Profit -->
-    <div class="rl-book">
-      <h3 class="rl-book__title">Markup &amp; Profit: A Contractor's Guide, Revisited</h3>
-      <p class="rl-book__author">Michael Stone</p>
-      <p class="rl-book__desc">
-        Contractors charge too little. This book makes the case for why, and walks through
-        how to actually calculate a markup that keeps the lights on after labor, material, overhead,
-        and a reasonable profit margin. <strong>Not HVAC-specific, but the math is universal
-        and most people in the trades are undercharging</strong> in ways this book makes obvious.
-      </p>
-      <a class="rl-book__cta" href="https://www.amazon.com/s?k=Markup+Profit+Contractor+Guide+Michael+Stone&tag=kraymo-20" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
-        View on Amazon
-      </a>
-    </div>
-
-    <!-- The E-Myth Contractor -->
-    <div class="rl-book">
-      <h3 class="rl-book__title">The E-Myth Contractor</h3>
-      <p class="rl-book__author">Michael E. Gerber</p>
-      <p class="rl-book__desc">
-        The original <em>E-Myth</em> is a classic, but the contractor-specific version cuts to the point
-        faster. The core argument — that being good at the trade doesn't automatically make you good at
-        running a trade business — is one most shop owners figure out the hard way.
-        <strong>Better to read it before you hire your first employee.</strong>
-      </p>
-      <a class="rl-book__cta" href="https://www.amazon.com/s?k=E-Myth+Contractor+Gerber&tag=kraymo-20" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19M9 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0m8 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/></svg>
-        View on Amazon
-      </a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── Closing note ── -->
-<div class="rl-note">
-  <p>
-    If you have a book that should be on this list — something you actually use, not just something
-    that looked good on a shelf — <em>I'd like to hear about it.</em> The best recommendations in
-    this trade still travel by word of mouth.
-  </p>
 </div>
