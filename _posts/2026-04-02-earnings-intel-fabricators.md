@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "What Wall Street's Earnings Calls Can Tell a Fabrication Shop"
+description: "Most fab shops don't read earnings calls, but there's useful information in them if you know what to look for. Here's how I use four public companies as an early read on work, pricing pressure, and what may be coming next."
+category: Business & Shop Planning
 date: 2026-04-02
-author: knockingtin
-categories: [business, fabrication, market-intelligence]
+read_time: 9
+featured: false
 tags: [sheet-metal, fabrication, watsco, aaon, hvac-market, material-costs, business-intelligence]
-description: "Most fab shops do not read earnings calls, but there is useful information in them if you know what to look for. Here is how I would use four public companies as an early read on work, pricing pressure, and what may be coming next."
-excerpt: "I do not read earnings calls because I care about stocks. I read them because the companies upstream from a fab shop usually tell you what they are seeing before it shows up on your floor. If you know where to look, they can give you a decent early read on demand, backlog, and cost pressure."
 ---
 
 I do not read earnings calls because I care about stocks. I read them because the companies upstream from a fab shop usually tell you what they are seeing before it shows up on your floor.
@@ -140,9 +140,7 @@ Do not read this stuff and start acting like you have a crystal ball. That is no
 
 If the near-term channel sounds soft, I do not want to get sloppy on quoting. If backlog looks promising farther out, that is encouraging, but I still want real work in hand before I hire around a story. If big contractors are talking about cost pressure, I want to be more careful about how long I leave pricing open and how I buy material.
 
-That is the practical use.
-
-Not stock talk. Not macro talk. Just better judgment.
+That is the practical use. Not stock talk. Not macro talk. Just better judgment.
 
 A few habits make sense in an environment like that:
 
@@ -168,9 +166,7 @@ Not all growth is the same. A hot specialty niche does not always help the avera
 
 This does not need to be complicated.
 
-Put the earnings dates on a calendar. Read the press release. Skim the management commentary. Write down a few basic notes.
-
-That is enough.
+Put the earnings dates on a calendar. Read the press release. Skim the management commentary. Write down a few basic notes. That is enough.
 
 If you want a simple running sheet, track things like:
 
@@ -193,11 +189,7 @@ But there is a difference between being busy and being blind.
 
 You are never going to get perfect visibility in this business. Jobs move. Customers stall. Material jumps around. Schedules slip. That is the trade.
 
-Still, if a few public companies are telling you what they are seeing before it reaches your end of the chain, it is worth listening.
-
-Not because it gives you certainty.
-
-Because it gives you a slightly better read than just guessing.
+Still, if a few public companies are telling you what they are seeing before it reaches your end of the chain, it is worth listening. Not because it gives you certainty. Because it gives you a slightly better read than just guessing.
 
 ---
 
@@ -207,8 +199,7 @@ Because it gives you a slightly better read than just guessing.
 - [AAON investor relations](https://ir.aaon.com)
 - [Comfort Systems USA investor relations](https://investors.comfortsystemsusa.com)
 - [EMCOR investor relations](https://ir.emcorgroup.com)
-- [Duct sizing calculator](/duct-sizing) — Equal friction method, ASHRAE/SMACNA compliant
-- [MEP Markets: the contractor-side view of some of the same signals](https://mepmarkets.com)
+- [Duct sizing calculator](/tools/duct-sizing/) — Equal friction method, ASHRAE/SMACNA compliant
 
 ---
 
