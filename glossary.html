@@ -1,0 +1,867 @@
+---
+layout: default
+title: Sheet Metal & HVAC Glossary
+description: Plain-language definitions of HVAC sheet metal fabrication terms — written from the shop floor, not a textbook.
+permalink: /glossary/
+---
+
+<style>
+  :root {
+    --brass:       #b8922a;
+    --brass-light: #d4a93a;
+    --brass-dim:   #8a6c1e;
+    --charcoal:    #1e1e1e;
+    --surface:     #252525;
+    --surface-2:   #2d2d2d;
+    --border:      #383838;
+    --text:        #d4cfc8;
+    --text-muted:  #7a7570;
+    --text-faint:  #4a4540;
+    --radius:      4px;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Libre+Baskerville:ital@0;1&family=Rajdhani:wght@400;600&display=swap');
+
+  /* ── Hero ── */
+  .gl-hero {
+    padding: 4rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .gl-hero__eyebrow {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 0.75rem;
+  }
+  .gl-hero__title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--text);
+    line-height: 1.15;
+    margin: 0 0 1.25rem;
+  }
+  .gl-hero__lead {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 640px;
+  }
+  .gl-hero__lead em { color: var(--text); font-style: italic; }
+
+  /* ── Alpha nav ── */
+  .gl-alpha-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .gl-alpha-nav a {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.3rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    line-height: 1;
+  }
+  .gl-alpha-nav a:hover {
+    color: var(--brass);
+    border-color: var(--brass-dim);
+    background: rgba(184,146,42,0.06);
+    text-decoration: none;
+  }
+  .gl-alpha-nav a.inactive {
+    color: var(--text-faint);
+    border-color: var(--text-faint);
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  /* ── Letter section ── */
+  .gl-letter-section {
+    margin-bottom: 3rem;
+    scroll-margin-top: 1.5rem;
+  }
+  .gl-letter-section__heading {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .gl-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--brass);
+    line-height: 1;
+    min-width: 1.5rem;
+  }
+  .gl-letter-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── Term entries ── */
+  .gl-terms {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .gl-term {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .gl-term:last-child { border-bottom: none; }
+
+  @media (min-width: 640px) {
+    .gl-term {
+      grid-template-columns: 220px 1fr;
+      gap: 1.5rem;
+      align-items: baseline;
+    }
+  }
+
+  .gl-term__name {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+  @media (min-width: 640px) { .gl-term__name { margin-bottom: 0; } }
+
+  .gl-term__also {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--brass-dim);
+    font-weight: 400;
+    text-transform: none;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    margin-top: 0.15rem;
+  }
+
+  .gl-term__def {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+  .gl-term__def strong {
+    color: var(--text);
+    font-weight: normal;
+    font-style: italic;
+  }
+  .gl-term__def .shop-note {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--brass-dim);
+    font-style: italic;
+  }
+  .gl-term__def .shop-note::before {
+    content: '↳ ';
+    color: var(--brass-dim);
+  }
+
+  /* ── Footer note ── */
+  .gl-footer-note {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+  .gl-footer-note em { color: var(--text); font-style: italic; }
+</style>
+
+<div class="gl-hero">
+  <p class="gl-hero__eyebrow">&#9656; Reference</p>
+  <h1 class="gl-hero__title">Sheet Metal &amp; HVAC Glossary</h1>
+  <p class="gl-hero__lead">
+    The terminology in this trade can vary by region, by shop, and sometimes by who trained you.
+    These definitions are written from a <em>custom fabrication</em> perspective — focused on
+    how terms are actually used when you're standing at a machine making something, not reading a spec sheet.
+  </p>
+</div>
+
+<!-- Alpha nav -->
+<nav class="gl-alpha-nav" aria-label="Jump to letter">
+  <a href="#A">A</a>
+  <a href="#B">B</a>
+  <a href="#C">C</a>
+  <a href="#D">D</a>
+  <a href="#E">E</a>
+  <a href="#F">F</a>
+  <a href="#G">G</a>
+  <a href="#H">H</a>
+  <a class="inactive" href="#">I</a>
+  <a class="inactive" href="#">J</a>
+  <a class="inactive" href="#">K</a>
+  <a href="#L">L</a>
+  <a href="#M">M</a>
+  <a class="inactive" href="#">N</a>
+  <a href="#O">O</a>
+  <a href="#P">P</a>
+  <a class="inactive" href="#">Q</a>
+  <a href="#R">R</a>
+  <a href="#S">S</a>
+  <a href="#T">T</a>
+  <a class="inactive" href="#">U</a>
+  <a href="#V">V</a>
+  <a href="#W">W</a>
+  <a class="inactive" href="#">X</a>
+  <a class="inactive" href="#">Y</a>
+  <a class="inactive" href="#">Z</a>
+</nav>
+
+
+<!-- ═══════════════ A ═══════════════ -->
+<section class="gl-letter-section" id="A">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">A</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Aspect Ratio</div>
+      <div class="gl-term__def">
+        The ratio of a rectangular duct's width to its height — for example, a 24"×12" duct has a 2:1 aspect ratio.
+        <strong>SMACNA recommends keeping this at 4:1 or below</strong> whenever possible. High aspect ratios
+        increase surface area relative to the cross-section, which drives up friction loss and material cost.
+        A lot of coordination problems on job sites get solved by someone agreeing to flip the duct.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ B ═══════════════ -->
+<section class="gl-letter-section" id="B">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">B</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Brake
+        <span class="gl-term__also">also: box &amp; pan brake, finger brake, press brake</span>
+      </div>
+      <div class="gl-term__def">
+        A machine used to make straight bends in sheet metal. The cornice brake bends the full length of
+        the sheet in a single operation. A box-and-pan brake uses removable fingers so you can bend the
+        sides of a box without the tooling hitting the already-bent material.
+        <strong>Most custom HVAC work still gets shaped on a cornice brake</strong> — they're fast and
+        require relatively little setup for standard duct work.
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Button Punch Snap Lock</div>
+      <div class="gl-term__def">
+        A longitudinal seam used on round and flat oval duct where a folded lock is mechanically
+        staked at intervals by a "button punch" — a dimple pressed through both layers to prevent
+        the seam from pulling apart under pressure. <strong>Common on spiral duct and machine-formed
+        round pipe.</strong>
+        <span class="shop-note">Not the same as a Pittsburgh. Button punch is for round; Pittsburgh is for rectangular.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ C ═══════════════ -->
+<section class="gl-letter-section" id="C">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">C</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">CFM
+        <span class="gl-term__also">cubic feet per minute</span>
+      </div>
+      <div class="gl-term__def">
+        The standard unit of airflow volume in HVAC. Every duct, fitting, and piece of equipment in
+        the system is ultimately sized to move a certain number of CFM.
+        <strong>Velocity (FPM) × duct area (sq ft) = CFM.</strong>
+        When a contractor says a system is "delivering" or "short on" air, they're talking about CFM.
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Cheek</div>
+      <div class="gl-term__def">
+        The flat side panels of a rectangular elbow — the two faces that are parallel to the airflow
+        direction and perpendicular to the turn. The cheeks are typically the largest panels on the
+        fitting and <strong>carry the reinforcement</strong> on larger elbows.
+        <span class="shop-note">Throat, heel, and two cheeks — that's your elbow.</span>
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Collar
+        <span class="gl-term__also">also: takeoff collar, spin-in collar</span>
+      </div>
+      <div class="gl-term__def">
+        A short cylindrical fitting that connects a round branch duct to a main trunk. Can be a simple
+        cut and flanged hole, a stamped spin-in fitting, or a fully fabricated saddle collar depending
+        on the pressure class and shop preference. <strong>Spin-ins are faster to install;
+        fabricated collars are more structurally sound</strong> in high-velocity systems.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ D ═══════════════ -->
+<section class="gl-letter-section" id="D">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">D</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Drive Cleat
+        <span class="gl-term__also">also: plain drive, hemmed drive</span>
+      </div>
+      <div class="gl-term__def">
+        A flat strip of sheet metal, formed with two flanges, used to connect adjoining duct sections
+        at the top and bottom of a rectangular joint. The drive slides into S-cleat receivers on each
+        duct end and is hammered tight. <strong>Standard drives are 3" wide; on larger duct or
+        higher pressure, hemmed drives add rigidity.</strong>
+        <span class="shop-note">Half of every slip-and-drive connection. The other half is the S-cleat.</span>
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Duct Liner
+        <span class="gl-term__also">also: internal insulation, black board</span>
+      </div>
+      <div class="gl-term__def">
+        Fibrous glass insulation board adhered or mechanically fastened to the inside of metal duct.
+        Provides both thermal insulation and acoustic absorption. The liner reduces the effective
+        internal dimensions — <strong>a 12"×12" duct lined with 1" liner has an effective
+        airway of 10"×10"</strong> — so liner must be accounted for in duct sizing.
+        <span class="shop-note">Always size the metal to the outside dimension, not the net free area, unless the engineer specifies otherwise.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ E ═══════════════ -->
+<section class="gl-letter-section" id="E">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">E</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Equal Friction Method</div>
+      <div class="gl-term__def">
+        A duct sizing approach where every section of the system is designed to the same friction rate —
+        typically 0.1" WG per 100 feet of duct. By holding friction rate constant across all branches,
+        the system tends toward natural balance.
+        <strong>It's the most commonly used method for commercial HVAC</strong> and the basis for most
+        duct sizing calculators. The alternative — velocity reduction method — is less common in modern practice.
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Equivalent Length</div>
+      <div class="gl-term__def">
+        A way of expressing the pressure drop through a fitting as a length of straight duct that would
+        produce the same loss. A 90° elbow might have an equivalent length of 30 feet — meaning it
+        causes the same friction loss as 30 feet of straight duct the same size.
+        <strong>Used in duct design to account for fitting losses without calculating each one separately.</strong>
+        SMACNA and ASHRAE both publish equivalent length tables for common fittings.
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">External Static Pressure
+        <span class="gl-term__also">also: ESP</span>
+      </div>
+      <div class="gl-term__def">
+        The static pressure a fan or air handler must overcome — everything outside the unit itself:
+        ductwork, fittings, dampers, diffusers, filters, and coils.
+        <strong>Equipment is rated for a specific ESP; exceeding it reduces airflow.</strong>
+        Undersized or poorly designed duct systems are the most common cause of equipment running
+        against more external static than it's designed for.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ F ═══════════════ -->
+<section class="gl-letter-section" id="F">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">F</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Flat Oval Duct</div>
+      <div class="gl-term__def">
+        A duct profile with two flat parallel sides connected by semicircular ends — essentially a
+        round duct compressed in one dimension. Carries more air than a rectangle of the same height
+        and fits in tighter vertical spaces than round.
+        <strong>More efficient than rectangular, less so than round.</strong>
+        Fittings are more complex to fabricate and harder to source as pre-made pieces.
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Friction Rate
+        <span class="gl-term__also">also: friction loss per 100 feet</span>
+      </div>
+      <div class="gl-term__def">
+        The pressure drop per 100 linear feet of straight duct, expressed in inches of water gauge (in. WG).
+        The standard design friction rate for most commercial supply duct is <strong>0.1" WG per 100 feet.</strong>
+        Higher friction rates mean smaller duct and faster air; lower rates mean larger duct and quieter delivery.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ G ═══════════════ -->
+<section class="gl-letter-section" id="G">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">G</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Gauge
+        <span class="gl-term__also">also: sheet gauge, ga.</span>
+      </div>
+      <div class="gl-term__def">
+        A number indicating sheet metal thickness — counterintuitively, <strong>higher gauge numbers
+        mean thinner material.</strong> 26 gauge (0.0179") is the standard for most low-pressure
+        residential and light commercial duct. 24 gauge (0.0239") is used for larger or higher-pressure
+        applications. SMACNA tables specify minimum gauges by duct width and pressure class.
+        <span class="shop-note">When someone says "go heavier," they mean a lower gauge number.</span>
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Galvanized Steel
+        <span class="gl-term__also">also: G60, G90</span>
+      </div>
+      <div class="gl-term__def">
+        The standard material for HVAC ductwork — cold-rolled steel with a zinc coating applied by
+        hot-dipping. The G designation indicates coating weight: <strong>G90 has more zinc and
+        better corrosion resistance than G60.</strong> Most commercial duct is G90.
+        The zinc coating can outgas when welded and should not be cut with a torch in enclosed spaces.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ H ═══════════════ -->
+<section class="gl-letter-section" id="H">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">H</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Heel</div>
+      <div class="gl-term__def">
+        The outer radius of a rectangular elbow — the long way around the turn, opposite the throat.
+        The heel carries the most material in a radius elbow and is where
+        <strong>turning vanes anchor</strong> on long-radius fittings.
+        On a flat 90° elbow, the heel is a straight corner with no radius at all.
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Hem</div>
+      <div class="gl-term__def">
+        A fold made by bending the edge of sheet metal back on itself, creating a doubled-over edge.
+        Used to eliminate raw sharp edges, add stiffness to a panel edge, or create a receiver for a seam.
+        <strong>A single hem folds once; a double hem folds twice.</strong>
+        Hem widths are typically 3/16" to 3/8" depending on gauge and application.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ L ═══════════════ -->
+<section class="gl-letter-section" id="L">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">L</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Liner
+        <span class="gl-term__also">see: Duct Liner</span>
+      </div>
+      <div class="gl-term__def">
+        See <strong>Duct Liner</strong> above. In shop conversation "liner" almost always means internal
+        acoustic/thermal board. External wrap insulation is usually just called "wrap" or "duct wrap."
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Longitudinal Seam</div>
+      <div class="gl-term__def">
+        The seam that runs the length of a duct section, closing the sheet into a tube or box.
+        On rectangular duct this is typically a <strong>Pittsburgh seam</strong>.
+        On round duct it may be a button punch snap lock or a spiral seam on machine-formed pipe.
+        SMACNA classifies longitudinal seam types by pressure class.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ M ═══════════════ -->
+<section class="gl-letter-section" id="M">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">M</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Mastic</div>
+      <div class="gl-term__def">
+        A thick, paste-like sealant used to air-seal duct joints and seams.
+        Applied by brush or glove over the connection and embedded in mesh tape on larger gaps.
+        <strong>The correct way to seal duct.</strong> Duct tape (the silver cloth kind) is not —
+        it fails over time with heat cycling. UL 181-listed mastic holds indefinitely.
+        <span class="shop-note">If a building inspector is watching, use mastic. If the customer is watching, use mastic. Use mastic.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ O ═══════════════ -->
+<section class="gl-letter-section" id="O">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">O</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Offset</div>
+      <div class="gl-term__def">
+        A fitting that shifts the centerline of the duct in one or two planes without changing the
+        duct size or direction of travel. Used to route around structural members, pipes, or other
+        obstructions. <strong>Offsets are one of the most commonly custom-fabricated fittings</strong>
+        because the specific dimensions rarely match a catalog item.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ P ═══════════════ -->
+<section class="gl-letter-section" id="P">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">P</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Pittsburgh Seam
+        <span class="gl-term__also">also: Pittsburgh lock, Pitts</span>
+      </div>
+      <div class="gl-term__def">
+        The standard longitudinal seam for rectangular sheet metal duct. One edge of the sheet is
+        formed into a pocket; the adjacent edge is folded over a right angle and driven into that pocket,
+        then hammered flat. <strong>Produces a mechanically interlocked, air-resistant seam</strong>
+        that closes the duct section without fasteners.
+        Named for its development in Pittsburgh-area sheet metal shops in the early 20th century.
+        <span class="shop-note">The machine that forms the pocket is called a Pittsburgh machine, or just "the Pitts."</span>
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Plenum</div>
+      <div class="gl-term__def">
+        A chamber or box that collects or distributes air before it enters or exits the duct system.
+        A supply plenum sits on top of the furnace or air handler; a return plenum collects air from
+        multiple return grilles. <strong>Plenums operate at lower velocity than branch ducts</strong>
+        and are typically fabricated from heavier gauge than the branches.
+        The term is also used loosely to describe a ceiling cavity used as a return air path.
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Pressure Class</div>
+      <div class="gl-term__def">
+        A SMACNA classification that determines minimum construction requirements — gauge, seam type,
+        reinforcement, and joint type — based on the operating static pressure of the duct system.
+        Common classes are ½", 1", 2", 3", 4", and 6" WG.
+        <strong>Most residential and light commercial duct is ½" or 1" pressure class.</strong>
+        Industrial and high-velocity systems may require 3" or higher.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ R ═══════════════ -->
+<section class="gl-letter-section" id="R">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">R</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Reinforcement
+        <span class="gl-term__also">also: cross-breaking, tie rod, standing seam</span>
+      </div>
+      <div class="gl-term__def">
+        Methods used to stiffen duct panels against pressure-induced deflection. Cross-breaking
+        (diagonal creases pressed into a flat panel) adds rigidity by triangulating the surface.
+        Hat channels, angle iron, and tie rods are used on larger duct where cross-breaking isn't enough.
+        <strong>SMACNA tables specify reinforcement type and spacing by duct width and pressure class.</strong>
+        Ignoring reinforcement schedules is one of the most common code violations in duct installation.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ S ═══════════════ -->
+<section class="gl-letter-section" id="S">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">S</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">S-Cleat
+        <span class="gl-term__also">also: S-slip, standing S</span>
+      </div>
+      <div class="gl-term__def">
+        A formed strip with an S-shaped cross-section, applied to the top and bottom edges of a
+        rectangular duct section to receive the drive cleat. The drive slides through the channel
+        formed by the S-cleat on both ducts, pulling the joint together.
+        <strong>S-cleats and drive cleats together make up the slip-and-drive connection</strong>
+        used on the majority of rectangular duct joints in the field.
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Slip-and-Drive
+        <span class="gl-term__also">also: S&amp;D, slip joint</span>
+      </div>
+      <div class="gl-term__def">
+        The dominant longitudinal joint method for rectangular duct. S-cleats are applied to the
+        top and bottom of each duct section; a drive cleat is slid through both and hammered
+        tight on the sides. Fast to assemble in the field with no fasteners.
+        <strong>Not suitable for high-pressure duct without supplementary sealing and mechanical fasteners.</strong>
+        <span class="shop-note">On a bad day on a big job, you'll hammer a thousand of these. Your forearm knows when it's done right.</span>
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Static Pressure
+        <span class="gl-term__also">also: SP, in. WG</span>
+      </div>
+      <div class="gl-term__def">
+        The pressure exerted uniformly in all directions by the air inside a duct — the "push"
+        against the duct walls, measured in inches of water gauge (in. WG).
+        Positive static pressure means the duct is pushing out (supply side);
+        negative means the duct is pulling in (return side).
+        <strong>All duct sizing, construction standards, and equipment ratings are based on static pressure.</strong>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ T ═══════════════ -->
+<section class="gl-letter-section" id="T">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">T</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Throat</div>
+      <div class="gl-term__def">
+        The inside radius of a rectangular elbow — the short way around the turn. On a standard
+        flat 90° elbow the throat radius is zero (a sharp corner); on a radius elbow it's typically
+        equal to the duct width. <strong>Sharp-throat elbows generate significantly more turbulence
+        and pressure drop than radius elbows</strong> of the same size.
+        Turning vanes are used in sharp-throat elbows to recover some of that loss.
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Transition</div>
+      <div class="gl-term__def">
+        A fitting that changes the cross-sectional shape or size of the duct — round-to-rectangular,
+        large-to-small, or any combination. <strong>One of the most commonly custom-fabricated
+        fittings in the shop</strong> because the specific dimensions are almost never a catalog match.
+        The slope of the transition walls affects pressure recovery: gradual transitions (under 15°)
+        lose less pressure than abrupt ones.
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Turning Vanes
+        <span class="gl-term__also">also: vanes, splitter vanes</span>
+      </div>
+      <div class="gl-term__def">
+        Curved metal blades installed inside a sharp-throat elbow to redirect airflow smoothly
+        around the turn, reducing turbulence and pressure drop.
+        <strong>A vaned 90° elbow can have an equivalent length 5–10× shorter than an unvaned one</strong>
+        of the same size. Single-blade and double-blade assemblies are common; rails and spacers
+        hold the vanes in position.
+        <span class="shop-note">Installing vanes correctly takes longer than making the fitting. That time is worth it on large duct.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ V ═══════════════ -->
+<section class="gl-letter-section" id="V">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">V</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Velocity
+        <span class="gl-term__also">FPM — feet per minute</span>
+      </div>
+      <div class="gl-term__def">
+        How fast the air is moving through the duct, measured in feet per minute.
+        <strong>CFM ÷ duct area (sq ft) = velocity (FPM).</strong>
+        Recommended velocities vary by application: main trunks typically run 700–1,000 FPM;
+        branch ducts 600–900 FPM; final runouts 400–600 FPM. Higher velocity means more noise,
+        more friction loss, and more system pressure required.
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Velocity Pressure
+        <span class="gl-term__also">also: VP, dynamic pressure</span>
+      </div>
+      <div class="gl-term__def">
+        The pressure component associated with the kinetic energy of moving air — the "push" of
+        airflow in the direction of travel, as opposed to static pressure which acts equally in
+        all directions. <strong>Total pressure = static pressure + velocity pressure.</strong>
+        Velocity pressure is typically small relative to static pressure in HVAC duct systems
+        but matters significantly in fan selection and high-velocity applications.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ W ═══════════════ -->
+<section class="gl-letter-section" id="W">
+  <div class="gl-letter-section__heading">
+    <span class="gl-letter">W</span>
+    <div class="gl-letter-rule"></div>
+  </div>
+  <div class="gl-terms">
+
+    <div class="gl-term">
+      <div class="gl-term__name">Water Gauge
+        <span class="gl-term__also">also: in. WG, inches water column, in. W.C.</span>
+      </div>
+      <div class="gl-term__def">
+        The unit of pressure measurement used throughout HVAC — the height of a column of water
+        (in inches) that a given pressure would support. One inch of water gauge equals approximately
+        0.036 PSI. <strong>Used because HVAC pressures are very low relative to other mechanical systems</strong>
+        and PSI would produce inconveniently small decimal numbers.
+        A manometer or Magnehelic gauge reads directly in in. WG.
+      </div>
+    </div>
+
+    <div class="gl-term">
+      <div class="gl-term__name">Wye
+        <span class="gl-term__also">also: Y-fitting, lateral</span>
+      </div>
+      <div class="gl-term__def">
+        A fitting that splits a duct trunk into two branches at an angle — as opposed to a tee,
+        which branches at 90°. <strong>Wyes produce less turbulence and lower pressure drop
+        than tees</strong> because the airflow doesn't have to make an abrupt turn.
+        In high-performance duct design, wyes are preferred at main branch takeoffs wherever
+        geometry allows.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<div class="gl-footer-note">
+  <p>
+    This glossary is a working document — terms get added as they come up.
+    If you're looking for something that isn't here yet, or if a definition
+    doesn't match how the term is used in your region or trade,
+    <em>I'd genuinely like to hear about it.</em>
+    The vocabulary in this trade is more regional than most people realize.
+  </p>
+</div>
